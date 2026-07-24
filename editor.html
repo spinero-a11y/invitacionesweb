@@ -543,7 +543,29 @@
       }
     }
   </script>
-</body>
-</html>
+  <!-- Menú Contextual Personalizado -->
+<div id="customContextMenu" class="context-menu">
+  <ul>
+    <li><span>📋 Copiar</span><kbd>Ctrl+C</kbd></li>
+    <li><span>🖌️ Copiar estilo</span><kbd>Ctrl+Alt+C</kbd></li>
+    <li><span>📋 Pegar</span><kbd>Ctrl+V</kbd></li>
+    <li><span>📄 Duplicar</span><kbd>Ctrl+D</kbd></li>
+    <li><span>🗑️ Eliminar</span><kbd>DELETE</kbd></li>
+    <hr>
+    <li class="has-submenu"><span>📚 Capa</span><span>›</span></li>
+    <li class="has-submenu"><span>📐 Alinear a la página</span><span>›</span></li>
+    <hr>
+    <!-- Opción PRO conectada a tu función de abrirModalPro() -->
+    <li onclick="abrirModalPro()"><span>⚙️ Crear un componente</span><span class="pro-badge">👑</span></li>
+    <li><span>💬 Comentar</span><kbd>Ctrl+Alt+N</kbd></li>
+    <li><span>🔒 Bloquear</span><kbd>Alt+Shift+L</kbd></li>
+    <li><span>🔗 Añadir un enlace</span><kbd>Ctrl+K</kbd></li>
+    <li><span>⏱️ Temporización del elemento</span></li>
+    <li><span>♿ Texto alternativo</span></li>
+    <hr>
+    <li><span>🪄 Escritura Mágica</span></li>
+    <li onclick="abrirModalPro()"><span>🌐 Traducir el texto</span><span class="pro-badge">👑</span></li>
+  </ul>
+</div>
 </body>
 </html>
