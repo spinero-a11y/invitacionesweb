@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mis Proyectos | InvitArt</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="main.css">
+</head>
+<body>
+
+  <!-- Navegación -->
+  <header class="navbar">
+    <div class="logo">
+      <span class="logo-icon">✨</span> InvitArt
+    </div>
+    <nav class="nav-links">
+      <a href="index.html">Explorar Plantillas</a>
+      <a href="creadores.html">Creadores PRO</a>
+      <a href="proyectos.html" class="active">Mis Proyectos</a>
+    </nav>
+    <div class="user-profile-nav">
+      <span class="user-name">Hola, Usuario 👋</span>
+    </div>
+  </header>
+
+  <!-- Panel de Mis Proyectos -->
+  <div class="dashboard-layout">
+    
+    <!-- Sidebar de Organización -->
+    <aside class="sidebar">
+      <button class="btn-primary btn-block mb-20">+ Nuevo Proyecto</button>
+      
+      <nav class="sidebar-menu">
+        <a href="#" class="sidebar-item active">📁 Mis Invitaciones</a>
+        <a href="#" class="sidebar-item">📂 Carpetas de Eventos</a>
+        <a href="#" class="sidebar-item">🖼️ Multimedia Subida</a>
+        <a href="#" class="sidebar-item">🗑️ Papelera (30 días)</a>
+      </nav>
+    </aside>
+
+    <!-- Área Principal de Proyectos -->
+    <main class="dashboard-content">
+      <div class="content-header">
+        <h2>Mis Invitaciones y Borradores</h2>
+        <span class="sync-status">☁️ Guardado automático activo</span>
+      </div>
+
+      <!-- Grid de Proyectos Guardados -->
+      <div class="template-grid">
+        
+        <!-- Proyecto 1 -->
+        <div class="card">
+          <div class="card-preview preview-boda">
+            <div class="preview-mockup">
+              <h4>Boda Sofía & Mateo</h4>
+              <p>Guardado hace 2 horas</p>
+            </div>
+          </div>
+          <div class="card-body">
+            <h3>Invitación Principal Boda</h3>
+            <p class="creator">Carpeta: <strong>Boda Sofía 2026</strong></p>
+            <div class="card-footer">
+              <button class="btn-action">✏️ Editar</button>
+              <button class="btn-secondary">📥 Exportar / RSVP</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Proyecto 2 -->
+        <div class="card">
+          <div class="card-preview preview-infantil">
+            <div class="preview-mockup">
+              <h4>Cumple Lucas #5</h4>
+              <p>Guardado ayer</p>
+            </div>
+          </div>
+          <div class="card-body">
+            <h3>Pase VIP Safari</h3>
+            <p class="creator">Carpeta: <strong>Fiesta Lucas</strong></p>
+            <div class="card-footer">
+              <button class="btn-action">✏️ Editar</button>
+              <button class="btn-secondary">📥 Exportar / RSVP</button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </main>
+
+  </div>
+
+</body>
+</html>
