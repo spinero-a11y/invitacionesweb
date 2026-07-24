@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mis Invitaciones | InvitArt</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="main.css">
+</head>
+<body>
+
+  <!-- Navegación -->
+  <header class="navbar">
+    <div class="logo">
+      <span class="logo-icon">✨</span> InvitArt
+    </div>
+    <nav class="nav-links">
+      <a href="index.html">Explorar Plantillas</a>
+      <a href="creadores.html">Creadores PRO</a>
+      <a href="invitaciones.html" class="active">Mis Proyectos</a>
+    </nav>
+    <div class="user-profile-nav">
+      <span class="user-name">Hola, Usuario 👋</span>
+    </div>
+  </header>
+
+  <!-- Panel de Mis Invitaciones -->
+  <div class="dashboard-layout">
+    
+    <!-- Sidebar de Navegación del Panel -->
+    <aside class="sidebar">
+      <a href="editor.html" class="btn-primary btn-block mb-20" style="text-align: center; text-decoration: none; display: block;">+ Crear Nueva Invitación</a>
+      
+      <nav class="sidebar-menu">
+        <a href="invitaciones.html" class="sidebar-item active">📁 Mis Invitaciones</a>
+        <a href="carpetas.html" class="sidebar-item">📂 Carpetas de Eventos</a>
+        <a href="multimedia.html" class="sidebar-item">🖼️ Multimedia Subida</a>
+        <a href="papelera.html" class="sidebar-item">🗑️ Papelera (30 días)</a>
+      </nav>
+    </aside>
+
+    <!-- Área Principal -->
+    <main class="dashboard-content">
+      <div class="content-header">
+        <div>
+          <h2>Mis Invitaciones</h2>
+          <p style="color: var(--text-muted); font-size: 0.9rem;">Gestiona, edita y comparte tus tarjetas de eventos</p>
+        </div>
+        <span class="sync-status">☁️ Guardado automático activo</span>
+      </div>
+
+      <!-- Filtros Rápidos -->
+      <div class="category-filter" style="margin-bottom: 25px;">
+        <button class="filter-btn active">Todas (3)</button>
+        <button class="filter-btn">📝 Borradores</button>
+        <button class="filter-btn">✅ Listas para Enviar</button>
+        <button class="filter-btn">📲 Con RSVP Activo</button>
+      </div>
+
+      <!-- Grid de Invitaciones -->
+      <div class="template-grid">
+        
+        <!-- Invitación 1 -->
+        <div class="card">
+          <div class="card-preview preview-boda">
+            <span class="badge-tag free">Publicada</span>
+            <div class="preview-mockup">
+              <h4>Sofía & Mateo</h4>
+              <p>Boda Civil y Fiesta</p>
+            </div>
+          </div>
+          <div class="card-body">
+            <h3>Invitación Principal Boda</h3>
+            <p class="creator">Carpeta: <strong>Boda Sofía 2026</strong></p>
+            <div class="rsvp-stats">
+              <span>📩 42/50 Confirmados (RSVP)</span>
+            </div>
+            <div class="card-footer">
+              <a href="editor.html" class="btn-action">✏️ Editar</a>
+              <button class="btn-secondary">🔗 Ver Enlace</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Invitación 2 -->
+        <div class="card">
+          <div class="card-preview preview-infantil">
+            <span class="badge-tag free">Borrador</span>
+            <div class="preview-mockup">
+              <h4>¡Mi Cumple #5!</h4>
+              <p>Fiesta Safari Lucas</p>
+            </div>
+          </div>
+          <div class="card-body">
+            <h3>Pase Digital VIP Dinosaurios</h3>
+            <p class="creator">Carpeta: <strong>Fiesta Lucas</strong></p>
+            <div class="rsvp-stats">
+              <span>⏳ Sin publicar</span>
+            </div>
+            <div class="card-footer">
+              <a href="editor.html" class="btn-action">✏️ Editar</a>
+              <button class="btn-secondary">📥 PDF / PNG</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Invitación 3 -->
+        <div class="card">
+          <div class="card-preview preview-xv">
+            <span class="badge-tag free">Publicada</span>
+            <div class="preview-mockup">
+              <h4>Mis XV Años</h4>
+              <p>Valentina</p>
+            </div>
+          </div>
+          <div class="card-body">
+            <h3>Tarjeta de Agradecimiento</h3>
+            <p class="creator">Carpeta: <strong>Sin clasificar</strong></p>
+            <div class="rsvp-stats">
+              <span>📩 15 Agradecimientos enviados</span>
+            </div>
+            <div class="card-footer">
+              <a href="editor.html" class="btn-action">✏️ Editar</a>
+              <button class="btn-secondary">🔗 Ver Enlace</button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </main>
+
+  </div>
+
+</body>
+</html>
