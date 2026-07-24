@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Papelera | InvitArt</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="main.css">
+</head>
+<body>
+
+  <header class="navbar">
+    <div class="logo"><span class="logo-icon">✨</span> InvitArt</div>
+    <nav class="nav-links">
+      <a href="index.html">Explorar Plantillas</a>
+      <a href="creadores.html">Creadores PRO</a>
+      <a href="proyectos.html" class="active">Mis Proyectos</a>
+    </nav>
+    <div class="user-profile-nav">
+      <span class="user-name">Hola, Usuario 👋</span>
+    </div>
+  </header>
+
+  <div class="dashboard-layout">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <button class="btn-secondary btn-block mb-20" style="color: #ef4444;">🗑️ Vaciar Papelera</button>
+            <nav class="sidebar-menu">
+             <a href="proyectos.html" class="sidebar-item">📁 Mis Invitaciones</a>
+              <a href="carpetas.html" class="sidebar-item">📂 Carpetas de Eventos</a>
+               <a href="multimedia.html" class="sidebar-item">🖼️ Multimedia Subida</a>
+             <a href="papelera.html" class="sidebar-item active">🗑️ Papelera (30 días)</a>
+            </nav>
+    </aside>
+
+    <!-- Contenido -->
+    <main class="dashboard-content">
+      <div class="content-header">
+        <h2>Papelera de Respaldo</h2>
+        <span class="sync-status" style="color: #f59e0b;">⚠️ Los elementos se eliminarán tras 30 días</span>
+      </div>
+
+      <div class="template-grid">
+        <!-- Elemento Eliminado -->
+        <div class="card">
+          <div class="card-preview preview-xv" style="opacity: 0.6;">
+            <div class="preview-mockup">
+              <h4>Borrador XV Años</h4>
+              <p>Eliminado hace 5 días</p>
+            </div>
+          </div>
+          <div class="card-body">
+            <h3>Diseño Antiguo Glitz</h3>
+            <p class="creator">Eliminado automáticamente en 25 días</p>
+            <div class="card-footer">
+              <button class="btn-action">🔄 Restaurar</button>
+              <button class="btn-secondary" style="color: #ef4444;">Eliminar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+</body>
+</html>

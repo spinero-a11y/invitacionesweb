@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Multimedia Subida | InvitArt</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="main.css">
+</head>
+<body>
+
+  <header class="navbar">
+    <div class="logo"><span class="logo-icon">✨</span> InvitArt</div>
+    <nav class="nav-links">
+      <a href="index.html">Explorar Plantillas</a>
+      <a href="creadores.html">Creadores PRO</a>
+      <a href="proyectos.html" class="active">Mis Proyectos</a>
+    </nav>
+    <div class="user-profile-nav">
+      <span class="user-name">Hola, Usuario 👋</span>
+    </div>
+  </header>
+
+  <div class="dashboard-layout">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <button class="btn-primary btn-block mb-20">☁️ Subir Archivo</button>
+      <nav class="sidebar-menu">
+        <a href="proyectos.html" class="sidebar-item">📁 Mis Invitaciones</a>
+        <a href="carpetas.html" class="sidebar-item">📂 Carpetas de Eventos</a>
+        <a href="multimedia.html" class="sidebar-item active">🖼️ Multimedia Subida</a>
+        <a href="papelera.html" class="sidebar-item">🗑️ Papelera (30 días)</a>
+      </nav>
+    </aside>
+
+    <!-- Contenido -->
+    <main class="dashboard-content">
+      <div class="content-header">
+        <h2>Historial de Multimedia</h2>
+        <span class="sync-status">Almacenamiento de fotos e imágenes propias</span>
+      </div>
+
+      <div class="media-grid">
+        <!-- Archivo Subido 1 -->
+        <div class="media-card">
+          <div class="media-preview" style="background-color: #f1f5f9;">🖼️ Foto_Novios.jpg</div>
+          <div class="media-info">
+            <p><strong>Foto_Novios.jpg</strong></p>
+            <small>2.4 MB - Hace 3 días</small>
+          </div>
+        </div>
+
+        <!-- Archivo Subido 2 -->
+        <div class="media-card">
+          <div class="media-preview" style="background-color: #f1f5f9;">🎨 Logo_Evento.png</div>
+          <div class="media-info">
+            <p><strong>Logo_Evento.png</strong></p>
+            <small>512 KB - Hace 1 semana</small>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+</body>
+</html>

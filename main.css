@@ -444,3 +444,77 @@ body {
 .mb-20 {
   margin-bottom: 20px;
 }
+/* --- Estilos de Carpetas y Multimedia --- */
+.folder-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+.folder-card {
+  background: white;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius);
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  box-shadow: var(--shadow-sm);
+}
+
+.folder-icon {
+  font-size: 2.2rem;
+}
+
+.folder-info {
+  flex: 1;
+}
+
+.folder-info h3 {
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.folder-info p {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+/* Multimedia */
+.media-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 20px;
+}
+
+.media-card {
+  background: white;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+}
+
+.media-preview {
+  height: 140px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+.media-info {
+  padding: 12px;
+}
+
+.media-info p {
+  font-size: 0.85rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.media-info small {
+  color: var(--text-muted);
+}
