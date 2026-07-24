@@ -766,3 +766,133 @@ body {
   font-size: 0.85rem;
   font-weight: 600;
 }
+/* --- Barra Lateral de Canva (Estilo Iconos Verticales) --- */
+.canva-nav-bar {
+  width: 72px;
+  background: #0f172a;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 10px;
+  gap: 4px;
+  overflow-y: auto;
+}
+
+.canva-nav-item {
+  width: 64px;
+  height: 60px;
+  background: transparent;
+  border: none;
+  color: #94a3b8;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.68rem;
+  font-weight: 500;
+  position: relative;
+  transition: all 0.2s;
+}
+
+.canva-nav-item .icon {
+  font-size: 1.2rem;
+  margin-bottom: 2px;
+}
+
+.canva-nav-item:hover, .canva-nav-item.active {
+  background: #1e293b;
+  color: white;
+}
+
+.crown-pro {
+  position: absolute;
+  top: 4px;
+  right: 12px;
+  font-size: 0.75rem;
+}
+
+/* Panel Desplegable de Contenido */
+.canva-drawer {
+  width: 280px;
+  background: white;
+  border-right: 1px solid var(--border-color);
+  overflow-y: auto;
+}
+
+.drawer-pane {
+  display: none;
+  padding: 20px;
+}
+
+.drawer-pane.active {
+  display: block;
+}
+
+.drawer-pane h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 2px; }
+.drawer-sub { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 20px; }
+
+/* Botones de Texto */
+.add-text-btn {
+  width: 100%;
+  padding: 12px;
+  background: #f8fafc;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  text-align: left;
+  margin-bottom: 10px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.add-text-btn:hover {
+  background: #e0e7ff;
+  border-color: var(--primary);
+}
+
+.title-type { font-size: 1.2rem; font-weight: 800; }
+.subtitle-type { font-size: 1rem; font-weight: 600; }
+.body-type { font-size: 0.85rem; font-weight: 400; }
+
+.pro-tag {
+  background: #facc15;
+  color: #0f172a;
+  font-size: 0.65rem;
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+.palette-swatch {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: inline-block;
+  margin-right: 10px;
+  cursor: pointer;
+  border: 2px solid white;
+  box-shadow: var(--shadow-sm);
+}
+
+/* Selección en el Lienzo */
+.canvas-item {
+  cursor: pointer;
+  border: 1px solid transparent;
+}
+
+.canvas-item.selected {
+  border: 2px dashed #6366f1 !important;
+}
+
+.drawer-card-item {
+  background: #f8fafc;
+  border: 1px solid var(--border-color);
+  padding: 12px;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  cursor: pointer;
+}
+
+.drawer-card-item:hover {
+  border-color: var(--primary);
+}
