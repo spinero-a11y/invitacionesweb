@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Editor de Invitaciones | InvitArt</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Great+Vibes&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="main.css">
+</head>
+<body class="editor-body">
+
+  <!-- Header Superior del Editor -->
+  <header class="editor-header">
+    <div class="editor-header-left">
+      <a href="invitaciones.html" class="btn-back" title="Volver a mis proyectos">← Volver</a>
+      <input type="text" class="project-title-input" value="Nueva Invitación Sin Título" placeholder="Nombre de la invitación...">
+      <span class="save-badge">☁️ Guardado en la nube</span>
+    </div>
+    
+    <div class="editor-header-right">
+      <button class="btn-secondary">👁️ Previsualizar</button>
+      <button class="btn-primary">📤 Exportar / Publicar</button>
+    </div>
+  </header>
+
+  <!-- Área de Trabajo Principal -->
+  <div class="editor-workspace">
+
+    <!-- Panel Lateral Izquierdo: Herramientas -->
+    <aside class="editor-sidebar">
+      <nav class="sidebar-tabs">
+        <button class="tab-btn active">🎨 Plantillas</button>
+        <button class="tab-btn">✍️ Texto</button>
+        <button class="tab-btn">🌸 Elementos</button>
+        <button class="tab-btn">🖼️ Mis Subidos</button>
+      </nav>
+
+      <div class="tab-content">
+        <h3>Añadir Elementos</h3>
+        <p class="tab-subtitle">Haz clic o arrastra al lienzo</p>
+
+        <!-- Bloques de Texto de muestra -->
+        <div class="tool-section">
+          <h4>Opciones de Texto</h4>
+          <button class="tool-btn-item">➕ Agregar Título Principal</button>
+          <button class="tool-btn-item">➕ Agregar Subtítulo</button>
+          <button class="tool-btn-item">➕ Agregar Texto del Evento (Fecha/Lugar)</button>
+        </div>
+
+        <!-- Decoraciones -->
+        <div class="tool-section">
+          <h4>Decoraciones para Eventos</h4>
+          <div class="element-grid">
+            <div class="element-box">💐 Marco Floral</div>
+            <div class="element-box">✨ Brillos / Gold</div>
+            <div class="element-box">📍 Icono Mapa</div>
+            <div class="element-box">🎀 Listón VIP</div>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Lienzo Principal (Canvas de Trabajo) -->
+    <main class="canvas-container">
+      
+      <!-- Barra Superior de Formato de Texto/Objeto -->
+      <div class="canvas-toolbar">
+        <select class="toolbar-select">
+          <option>Great Vibes (Elegante)</option>
+          <option selected>Inter (Moderna)</option>
+        </select>
+        <input type="number" class="toolbar-input-number" value="28" min="8" max="120">
+        <input type="color" class="toolbar-color" value="#0f172a">
+        <button class="tool-icon-btn"><b>B</b></button>
+        <button class="tool-icon-btn"><i>I</i></button>
+        <button class="tool-icon-btn">📄 Centrar</button>
+      </div>
+
+      <!-- Lienzo / Tarjeta de la Invitación -->
+      <div class="canvas-paper">
+        <div class="invitation-card-mockup">
+          <div class="card-element header-text" contenteditable="true">¡Nos Casamos!</div>
+          <div class="card-element names-text" contenteditable="true">Sofía & Mateo</div>
+          <div class="card-element details-text" contenteditable="true">
+            Sábado, 24 de Octubre de 2026<br>
+            18:00 HRS • Hacienda Los Olivos
+          </div>
+          <div class="card-element rsvp-button-mockup">
+            Confirmar Asistencia (RSVP)
+          </div>
+        </div>
+      </div>
+
+    </main>
+
+  </div>
+
+</body>
+</html>

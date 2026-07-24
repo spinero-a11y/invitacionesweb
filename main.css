@@ -518,3 +518,251 @@ body {
 .media-info small {
   color: var(--text-muted);
 }
+/* --- Estilos de Métricas RSVP --- */
+.rsvp-stats {
+  background: #f1f5f9;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--primary);
+  margin-bottom: 15px;
+  display: inline-block;
+}
+/* --- Estilos de la Interfaz del Editor --- */
+.editor-body {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background-color: #f1f5f9;
+}
+
+.editor-header {
+  height: 60px;
+  background: white;
+  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+  z-index: 10;
+}
+
+.editor-header-left {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.btn-back {
+  text-decoration: none;
+  color: var(--text-dark);
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.project-title-input {
+  border: 1px solid transparent;
+  font-size: 1.1rem;
+  font-weight: 700;
+  padding: 4px 8px;
+  border-radius: 6px;
+  outline: none;
+}
+
+.project-title-input:hover, .project-title-input:focus {
+  border-color: var(--border-color);
+  background: #f8fafc;
+}
+
+.save-badge {
+  font-size: 0.8rem;
+  color: #10b981;
+  font-weight: 500;
+}
+
+.editor-header-right {
+  display: flex;
+  gap: 10px;
+}
+
+/* Layout del Editor */
+.editor-workspace {
+  display: flex;
+  flex: 1;
+  height: calc(100vh - 60px);
+}
+
+/* Sidebar del Editor */
+.editor-sidebar {
+  width: 320px;
+  background: white;
+  border-right: 1px solid var(--border-color);
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar-tabs {
+  display: flex;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.tab-btn {
+  flex: 1;
+  padding: 12px 5px;
+  border: none;
+  background: transparent;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+}
+
+.tab-btn.active {
+  color: var(--primary);
+  border-bottom-color: var(--primary);
+  background: #fafafa;
+}
+
+.tab-content {
+  padding: 20px;
+  overflow-y: auto;
+}
+
+.tab-content h3 { font-size: 1.1rem; margin-bottom: 2px; }
+.tab-subtitle { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 20px; }
+
+.tool-section { margin-bottom: 25px; }
+.tool-section h4 { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 10px; text-transform: uppercase; }
+
+.tool-btn-item {
+  width: 100%;
+  text-align: left;
+  padding: 12px;
+  background: #f8fafc;
+  border: 1px dashed var(--border-color);
+  border-radius: 8px;
+  font-weight: 600;
+  margin-bottom: 8px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.tool-btn-item:hover {
+  background: #e0e7ff;
+  border-color: var(--primary);
+  color: var(--primary);
+}
+
+.element-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.element-box {
+  background: #f8fafc;
+  border: 1px solid var(--border-color);
+  padding: 20px 10px;
+  text-align: center;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.element-box:hover {
+  border-color: var(--primary);
+}
+
+/* Lienzo de Trabajo */
+.canvas-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background: #e2e8f0;
+}
+
+.canvas-toolbar {
+  height: 48px;
+  background: white;
+  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+  gap: 10px;
+}
+
+.toolbar-select, .toolbar-input-number {
+  padding: 6px 10px;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+}
+
+.toolbar-color {
+  border: none;
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
+  background: none;
+}
+
+.tool-icon-btn {
+  padding: 6px 12px;
+  background: white;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.canvas-paper {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 30px;
+  overflow: auto;
+}
+
+.invitation-card-mockup {
+  width: 380px;
+  height: 560px;
+  background: white;
+  box-shadow: 0 20px 30px rgba(0,0,0,0.15);
+  border-radius: 12px;
+  padding: 40px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  text-align: center;
+}
+
+.header-text {
+  font-family: 'Great Vibes', cursive;
+  font-size: 2.2rem;
+  color: #6366f1;
+}
+
+.names-text {
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: #0f172a;
+}
+
+.details-text {
+  font-size: 0.9rem;
+  color: #64748b;
+  line-height: 1.6;
+}
+
+.rsvp-button-mockup {
+  background: #0f172a;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
