@@ -3,88 +3,125 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>InvitArt - Crea Invitaciones Increíbles</title>
+  <title>InvitArt | Crea y Personaliza Invitaciones para tus Eventos</title>
+  
+  <!-- Fuente Google Fonts (Inter) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Estilos CSS -->
   <link rel="stylesheet" href="css/main.css">
 </head>
 <body>
 
-  <!-- 1. Encabezado y Navegación -->
+  <!-- Navegación -->
   <header class="navbar">
-    <div class="logo">🎉 InvitArt</div>
+    <div class="logo">
+      <span class="logo-icon">✨</span> InvitArt
+    </div>
     <nav class="nav-links">
-      <a href="#catalogo">Plantillas</a>
-      <a href="#comunidad">Comunidad Pro</a>
+      <a href="#catalogo" class="active">Explorar Plantillas</a>
+      <a href="#comunidad">Creadores PRO</a>
       <a href="proyectos.html">Mis Proyectos</a>
     </nav>
     <div class="auth-buttons">
       <button class="btn-secondary">Iniciar Sesión</button>
-      <button class="btn-primary">Crear Cuenta</button>
+      <button class="btn-primary">Registrarse Gratis</button>
     </div>
   </header>
 
-  <!-- 2. Hero Section con Buscador -->
+  <!-- Hero Section -->
   <section class="hero">
-    <h1>Diseña invitaciones únicas para tu evento especial</h1>
-    <p>Personaliza plantillas profesionales o crea las tuyas para compartir en la comunidad.</p>
-    
-    <div class="search-bar">
-      <input type="text" placeholder="Ej. Boda en la playa, Dinosaurios, XV Años...">
-      <button class="btn-primary">Buscar</button>
+    <div class="hero-content">
+      <span class="badge-hero">🎉 Plataforma #1 en Invitaciones Digitales</span>
+      <h1>Diseña invitaciones únicas e inolvidables</h1>
+      <p>Personaliza miles de plantillas para bodas, cumpleaños y eventos corporativos o vende tus propios diseños en nuestra comunidad de creadores.</p>
+      
+      <!-- Buscador Inteligente -->
+      <div class="search-box">
+        <span class="search-icon">🔍</span>
+        <input type="text" placeholder="Ej. Boda en la playa, Dinosaurios, Baby Shower...">
+        <button class="btn-primary">Buscar Evento</button>
+      </div>
     </div>
   </section>
 
-  <!-- 3. Catálogo de Categorías -->
-  <main id="catalogo" class="catalog-container">
-    <h2>Explora por Categoría</h2>
+  <!-- Catálogo de Plantillas -->
+  <main id="catalogo" class="catalog-section">
+    <div class="catalog-header">
+      <h2>Explora por Categoría</h2>
+      <p>Selecciona una plantilla para abrir el editor interactivo</p>
+    </div>
     
-    <div class="category-tags">
-      <button class="tag active">Todas</button>
-      <button class="tag">Bodas</button>
-      <button class="tag">Cumpleaños</button>
-      <button class="tag">XV Años</button>
-      <button class="tag">Baby Shower</button>
-      <button class="tag">Corporativos</button>
+    <!-- Filtros por Tipo de Fiestas -->
+    <div class="category-filter">
+      <button class="filter-btn active">Todas</button>
+      <button class="filter-btn">💍 Bodas</button>
+      <button class="filter-btn">🎂 Cumpleaños</button>
+      <button class="filter-btn">👑 XV Años</button>
+      <button class="filter-btn">🍼 Baby Shower</button>
+      <button class="filter-btn">💼 Corporativos</button>
+      <button class="filter-btn">⛪ Bautizos</button>
     </div>
 
-    <!-- Grid de Plantillas -->
+    <!-- Grid de Tarjetas -->
     <div class="template-grid">
       
-      <!-- Card 1 -->
+      <!-- Tarjeta 1 (PRO) -->
       <div class="card">
-        <div class="card-image" style="background-color: #f3e5f5;">
-          <span class="badge pro">PRO</span>
-          <p>Muestra Invitación Boda Elegant</p>
+        <div class="card-preview preview-boda">
+          <span class="badge-tag pro">PRO</span>
+          <div class="preview-mockup">
+            <h4>Sofía & Mateo</h4>
+            <p>Nuestra Boda</p>
+          </div>
         </div>
-        <div class="card-info">
+        <div class="card-body">
           <h3>Boda Botánica Elegante</h3>
-          <p>Por <span>@SofiaDesign</span></p>
-          <a href="editor.html" class="btn-edit">Personalizar</a>
+          <p class="creator">Por <strong>@SofiaDesign</strong></p>
+          <div class="card-footer">
+            <span class="type-label">Digital e Imprimible</span>
+            <a href="editor.html" class="btn-action">Personalizar</a>
+          </div>
         </div>
       </div>
 
-      <!-- Card 2 -->
+      <!-- Tarjeta 2 (Gratis) -->
       <div class="card">
-        <div class="card-image" style="background-color: #e0f7fa;">
-          <span class="badge free">Gratis</span>
-          <p>Muestra Cumpleaños Infantil</p>
+        <div class="card-preview preview-infantil">
+          <span class="badge-tag free">Gratis</span>
+          <div class="preview-mockup">
+            <h4>¡Mi Cumple #5!</h4>
+            <p>Fiesta Safari</p>
+          </div>
         </div>
-        <div class="card-info">
-          <h3>Fiesta Safari Dinosaurios</h3>
-          <p>Por <span>@InvitArtTeam</span></p>
-          <a href="editor.html" class="btn-edit">Personalizar</a>
+        <div class="card-body">
+          <h3>Safari Dinosaurios</h3>
+          <p class="creator">Por <strong>@InvitArtTeam</strong></p>
+          <div class="card-footer">
+            <span class="type-label">Pase Digital RSVP</span>
+            <a href="editor.html" class="btn-action">Personalizar</a>
+          </div>
         </div>
       </div>
 
-      <!-- Card 3 -->
+      <!-- Tarjeta 3 (PRO) -->
       <div class="card">
-        <div class="card-image" style="background-color: #fff3e0;">
-          <span class="badge pro">PRO</span>
-          <p>Muestra XV Años Dorado</p>
+        <div class="card-preview preview-xv">
+          <span class="badge-tag pro">PRO</span>
+          <div class="preview-mockup">
+            <h4>Mis XV Años</h4>
+            <p>Valentina</p>
+          </div>
         </div>
-        <div class="card-info">
-          <h3>XV Años Glitz & Gold</h3>
-          <p>Por <span>@MariaStudio</span></p>
-          <a href="editor.html" class="btn-edit">Personalizar</a>
+        <div class="card-body">
+          <h3>Glitz & Gold Luxury</h3>
+          <p class="creator">Por <strong>@MariaStudio</strong></p>
+          <div class="card-footer">
+            <span class="type-label">Efecto Dorado</span>
+            <a href="editor.html" class="btn-action">Personalizar</a>
+          </div>
         </div>
       </div>
 
