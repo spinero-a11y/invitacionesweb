@@ -3,92 +3,210 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Editor de Invitaciones | InvitArt</title>
+  <title>Editor Interactivo | InvitArt</title>
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Great+Vibes&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Great+Vibes&family=Playfair+Display:ital,wght@0,600;1,400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="main.css">
 </head>
 <body class="editor-body">
 
-  <!-- Header Superior del Editor -->
+  <!-- Header Superior -->
   <header class="editor-header">
     <div class="editor-header-left">
-      <a href="invitaciones.html" class="btn-back" title="Volver a mis proyectos">← Volver</a>
-      <input type="text" class="project-title-input" value="Nueva Invitación Sin Título" placeholder="Nombre de la invitación...">
+      <a href="invitaciones.html" class="btn-back">← Volver</a>
+      <input type="text" class="project-title-input" value="Mi Invitación de Bodas" id="projectTitle">
       <span class="save-badge">☁️ Guardado en la nube</span>
     </div>
     
     <div class="editor-header-right">
-      <button class="btn-secondary">👁️ Previsualizar</button>
-      <button class="btn-primary">📤 Exportar / Publicar</button>
+      <button class="btn-secondary" onclick="alert('Modo previsualización activado')">👁️ Previsualizar</button>
+      <button class="btn-primary" onclick="exportarInvitacion()">📤 Exportar / Descargar</button>
     </div>
   </header>
 
-  <!-- Área de Trabajo Principal -->
+  <!-- Workspace con Barra Lateral Estilo Canva -->
   <div class="editor-workspace">
 
-    <!-- Panel Lateral Izquierdo: Herramientas -->
-    <aside class="editor-sidebar">
-      <nav class="sidebar-tabs">
-        <button class="tab-btn active">🎨 Plantillas</button>
-        <button class="tab-btn">✍️ Texto</button>
-        <button class="tab-btn">🌸 Elementos</button>
-        <button class="tab-btn">🖼️ Mis Subidos</button>
-      </nav>
+    <!-- 1. BARRA VERTICAL DE ICONOS (Estilo Canva) -->
+    <aside class="canva-nav-bar">
+      <button class="canva-nav-item active" data-tab="tab-plantillas">
+        <span class="icon">🎨</span>
+        <span>Plantillas</span>
+      </button>
 
-      <div class="tab-content">
-        <h3>Añadir Elementos</h3>
-        <p class="tab-subtitle">Haz clic o arrastra al lienzo</p>
+      <button class="canva-nav-item" data-tab="tab-elementos">
+        <span class="icon">🧩</span>
+        <span>Elementos</span>
+      </button>
 
-        <!-- Bloques de Texto de muestra -->
-        <div class="tool-section">
-          <h4>Opciones de Texto</h4>
-          <button class="tool-btn-item">➕ Agregar Título Principal</button>
-          <button class="tool-btn-item">➕ Agregar Subtítulo</button>
-          <button class="tool-btn-item">➕ Agregar Texto del Evento (Fecha/Lugar)</button>
-        </div>
+      <button class="canva-nav-item" data-tab="tab-texto">
+        <span class="icon">T</span>
+        <span>Texto</span>
+      </button>
 
-        <!-- Decoraciones -->
-        <div class="tool-section">
-          <h4>Decoraciones para Eventos</h4>
-          <div class="element-grid">
-            <div class="element-box">💐 Marco Floral</div>
-            <div class="element-box">✨ Brillos / Gold</div>
-            <div class="element-box">📍 Icono Mapa</div>
-            <div class="element-box">🎀 Listón VIP</div>
+      <button class="canva-nav-item" data-tab="tab-marca">
+        <span class="crown-pro">👑</span>
+        <span class="icon">🏢</span>
+        <span>Marca</span>
+      </button>
+
+      <button class="canva-nav-item" data-tab="tab-subidos">
+        <span class="icon">☁️</span>
+        <span>Subidos</span>
+      </button>
+
+      <button class="canva-nav-item" data-tab="tab-herramientas">
+        <span class="icon">✏️</span>
+        <span>Herramientas</span>
+      </button>
+
+      <button class="canva-nav-item" data-tab="tab-proyectos">
+        <span class="icon">📁</span>
+        <span>Proyectos</span>
+      </button>
+
+      <button class="canva-nav-item" data-tab="tab-apps">
+        <span class="icon">🎛️</span>
+        <span>Apps</span>
+      </button>
+
+      <button class="canva-nav-item" data-tab="tab-multimedia">
+        <span class="icon">🖼️</span>
+        <span>Multimedia</span>
+      </button>
+    </aside>
+
+    <!-- 2. PANEL DESPLEGABLE DE CONTENIDO -->
+    <aside class="canva-drawer">
+
+      <!-- Pestaña 1: Plantillas -->
+      <div id="tab-plantillas" class="drawer-pane active">
+        <h3>Plantillas para Eventos</h3>
+        <p class="drawer-sub">Selecciona un diseño para cargar</p>
+        <div class="drawer-list">
+          <div class="drawer-card-item" onclick="cargarPlantilla('boda')">
+            <div class="item-preview preview-boda">💍 Boda Botánica</div>
+          </div>
+          <div class="drawer-card-item" onclick="cargarPlantilla('cumple')">
+            <div class="item-preview preview-infantil">🎂 Cumpleaños Safari</div>
+          </div>
+          <div class="drawer-card-item" onclick="cargarPlantilla('xv')">
+            <div class="item-preview preview-xv">👑 XV Años Luxury</div>
           </div>
         </div>
       </div>
-    </aside>
 
-    <!-- Lienzo Principal (Canvas de Trabajo) -->
-    <main class="canvas-container">
-      
-      <!-- Barra Superior de Formato de Texto/Objeto -->
-      <div class="canvas-toolbar">
-        <select class="toolbar-select">
-          <option>Great Vibes (Elegante)</option>
-          <option selected>Inter (Moderna)</option>
-        </select>
-        <input type="number" class="toolbar-input-number" value="28" min="8" max="120">
-        <input type="color" class="toolbar-color" value="#0f172a">
-        <button class="tool-icon-btn"><b>B</b></button>
-        <button class="tool-icon-btn"><i>I</i></button>
-        <button class="tool-icon-btn">📄 Centrar</button>
+      <!-- Pestaña 2: Elementos -->
+      <div id="tab-elementos" class="drawer-pane">
+        <h3>Elementos Gráficos</h3>
+        <p class="drawer-sub">Haz clic para agregar al lienzo</p>
+        <div class="element-grid">
+          <button class="element-box" onclick="agregarElemento('🌺 Marco Floral')">🌺 Marco Floral</button>
+          <button class="element-box" onclick="agregarElemento('✨ Brillos Gold')">✨ Brillos Gold</button>
+          <button class="element-box" onclick="agregarElemento('📍 Icono Ubicación')">📍 Mapa Icon</button>
+          <button class="element-box" onclick="agregarElemento('🎀 Listón Elegante')">🎀 Listón VIP</button>
+        </div>
       </div>
 
-      <!-- Lienzo / Tarjeta de la Invitación -->
+      <!-- Pestaña 3: Texto -->
+      <div id="tab-texto" class="drawer-pane">
+        <h3>Agregar Texto</h3>
+        <p class="drawer-sub">Toca para añadir a la invitación</p>
+        <button class="add-text-btn title-type" onclick="agregarTexto('Título del Evento', 'title')">Añadir un título</button>
+        <button class="add-text-btn subtitle-type" onclick="agregarTexto('Nombres de los Festejados', 'subtitle')">Añadir un subtítulo</button>
+        <button class="add-text-btn body-type" onclick="agregarTexto('Fecha, hora y lugar del evento...', 'body')">Añadir texto de información</button>
+      </div>
+
+      <!-- Pestaña 4: Marca -->
+      <div id="tab-marca" class="drawer-pane">
+        <h3>Kit de Marca <span class="pro-tag">PRO</span></h3>
+        <p class="drawer-sub">Paletas y fuentes de tu marca personal</p>
+        <div class="color-palette">
+          <div class="palette-swatch" style="background:#6366f1" onclick="cambiarColorLienzo('#6366f1')"></div>
+          <div class="palette-swatch" style="background:#ec4899" onclick="cambiarColorLienzo('#ec4899')"></div>
+          <div class="palette-swatch" style="background:#10b981" onclick="cambiarColorLienzo('#10b981')"></div>
+          <div class="palette-swatch" style="background:#f59e0b" onclick="cambiarColorLienzo('#f59e0b')"></div>
+        </div>
+      </div>
+
+      <!-- Pestaña 5: Subidos -->
+      <div id="tab-subidos" class="drawer-pane">
+        <h3>Archivos Subidos</h3>
+        <p class="drawer-sub">Sube tus fotos o logotipos</p>
+        <input type="file" id="fileUpload" style="display:none" onchange="subirImagen(event)">
+        <button class="btn-primary btn-block mb-20" onclick="document.getElementById('fileUpload').click()">☁️ Subir Archivo</button>
+        <div id="uploadedGallery" class="uploaded-gallery">
+          <small style="color:var(--text-muted)">No has subido archivos aún.</small>
+        </div>
+      </div>
+
+      <!-- Pestaña 6: Herramientas -->
+      <div id="tab-herramientas" class="drawer-pane">
+        <h3>Herramientas de Edición</h3>
+        <button class="btn-secondary btn-block mb-20" onclick="limpiarLienzo()">🗑️ Limpiar Lienzo</button>
+        <button class="btn-secondary btn-block" onclick="cambiarFondo()">🎨 Cambiar Fondo del Lienzo</button>
+      </div>
+
+      <!-- Pestaña 7: Proyectos -->
+      <div id="tab-proyectos" class="drawer-pane">
+        <h3>Tus Diseños</h3>
+        <p class="drawer-sub">Diseños guardados recientemente</p>
+        <div class="drawer-card-item">
+          <strong>Boda civil y recepción</strong><br>
+          <small style="color:var(--text-muted)">Editado hace 2 horas</small>
+        </div>
+      </div>
+
+      <!-- Pestaña 8: Apps -->
+      <div id="tab-apps" class="drawer-pane">
+        <h3>Integraciones</h3>
+        <button class="btn-secondary btn-block mb-20" onclick="alert('Integración con Google Maps para ubicación de fiesta')">📍 Google Maps RSVP</button>
+        <button class="btn-secondary btn-block" onclick="alert('Generando código QR para el pase...')">📱 Generar Código QR</button>
+      </div>
+
+      <!-- Pestaña 9: Multimedia -->
+      <div id="tab-multimedia" class="drawer-pane">
+        <h3>Fotos e Ilustraciones</h3>
+        <div class="drawer-list">
+          <div class="element-box" onclick="agregarElemento('📸 Foto Muestra Novios')">📸 Foto Pareja</div>
+          <div class="element-box" onclick="agregarElemento('🎈 Globos Festejo')">🎈 Globos Fiesta</div>
+        </div>
+      </div>
+
+    </aside>
+
+    <!-- 3. LIENZO Y BARRA DE FORMATO DE TEXTO -->
+    <main class="canvas-container">
+      
+      <!-- Toolbar de formato para el texto seleccionado -->
+      <div class="canvas-toolbar">
+        <select id="fontSelect" class="toolbar-select" onchange="aplicarFuente(this.value)">
+          <option value="'Inter', sans-serif">Inter (Moderna)</option>
+          <option value="'Great Vibes', cursive">Great Vibes (Elegante)</option>
+          <option value="'Playfair Display', serif">Playfair (Clásica)</option>
+        </select>
+
+        <input type="number" id="fontSizeInput" class="toolbar-input-number" value="28" min="10" max="100" onchange="aplicarTamano(this.value)">
+        <input type="color" id="textColorInput" class="toolbar-color" value="#0f172a" onchange="aplicarColorTexto(this.value)">
+
+        <button class="tool-icon-btn" onclick="formatoTexto('bold')"><b>B</b></button>
+        <button class="tool-icon-btn" onclick="formatoTexto('italic')"><i>I</i></button>
+        <button class="tool-icon-btn" onclick="formatoTexto('center')">📄 Alineación</button>
+        <button class="tool-icon-btn" style="color: #ef4444;" onclick="borrarElementoSeleccionado()">🗑️ Eliminar Elemento</button>
+      </div>
+
+      <!-- Hoja del Lienzo Interactivo -->
       <div class="canvas-paper">
-        <div class="invitation-card-mockup">
-          <div class="card-element header-text" contenteditable="true">¡Nos Casamos!</div>
-          <div class="card-element names-text" contenteditable="true">Sofía & Mateo</div>
-          <div class="card-element details-text" contenteditable="true">
+        <div id="canvasSheet" class="invitation-card-mockup" onclick="deseleccionarTodo(event)">
+          <div class="card-element header-text canvas-item" onclick="seleccionarElemento(this, event)" contenteditable="true">¡Nos Casamos!</div>
+          <div class="card-element names-text canvas-item" onclick="seleccionarElemento(this, event)" contenteditable="true">Sofía & Mateo</div>
+          <div class="card-element details-text canvas-item" onclick="seleccionarElemento(this, event)" contenteditable="true">
             Sábado, 24 de Octubre de 2026<br>
             18:00 HRS • Hacienda Los Olivos
           </div>
-          <div class="card-element rsvp-button-mockup">
+          <div class="card-element rsvp-button-mockup canvas-item" onclick="seleccionarElemento(this, event)">
             Confirmar Asistencia (RSVP)
           </div>
         </div>
@@ -97,6 +215,161 @@
     </main>
 
   </div>
+
+  <!-- SCRIPT INTERACTIVO EN TIEMPO REAL -->
+  <script>
+    let elementoSeleccionado = null;
+
+    // 1. Cambio de Pestañas en la Barra Lateral
+    const navItems = document.querySelectorAll('.canva-nav-item');
+    const drawerPanes = document.querySelectorAll('.drawer-pane');
+
+    navItems.forEach(item => {
+      item.addEventListener('click', () => {
+        navItems.forEach(i => i.classList.remove('active'));
+        drawerPanes.forEach(p => p.classList.remove('active'));
+
+        item.classList.add('active');
+        const targetTab = item.getAttribute('data-tab');
+        document.getElementById(targetTab).classList.add('active');
+      });
+    });
+
+    // 2. Selección de Elementos en el Lienzo
+    function seleccionarElemento(el, e) {
+      if(e) e.stopPropagation();
+      if(elementoSeleccionado) elementoSeleccionado.classList.remove('selected');
+      elementoSeleccionado = el;
+      elementoSeleccionado.classList.add('selected');
+    }
+
+    function deseleccionarTodo(e) {
+      if(e.target.id === 'canvasSheet') {
+        if(elementoSeleccionado) elementoSeleccionado.classList.remove('selected');
+        elementoSeleccionado = null;
+      }
+    }
+
+    // 3. Funciones de formato de Texto
+    function aplicarFuente(fuente) {
+      if(elementoSeleccionado) elementoSeleccionado.style.fontFamily = fuente;
+    }
+
+    function aplicarTamano(tamano) {
+      if(elementoSeleccionado) elementoSeleccionado.style.fontSize = tamano + 'px';
+    }
+
+    function aplicarColorTexto(color) {
+      if(elementoSeleccionado) elementoSeleccionado.style.color = color;
+    }
+
+    function formatoTexto(tipo) {
+      if(!elementoSeleccionado) return;
+      if(tipo === 'bold') {
+        elementoSeleccionado.style.fontWeight = elementoSeleccionado.style.fontWeight === 'bold' ? 'normal' : 'bold';
+      } else if(tipo === 'italic') {
+        elementoSeleccionado.style.fontStyle = elementoSeleccionado.style.fontStyle === 'italic' ? 'normal' : 'italic';
+      } else if(tipo === 'center') {
+        elementoSeleccionado.style.textAlign = elementoSeleccionado.style.textAlign === 'center' ? 'left' : 'center';
+      }
+    }
+
+    function borrarElementoSeleccionado() {
+      if(elementoSeleccionado) {
+        elementoSeleccionado.remove();
+        elementoSeleccionado = null;
+      }
+    }
+
+    // 4. Agregar Nuevos Textos y Elementos
+    function agregarTexto(contenido, clase) {
+      const canvas = document.getElementById('canvasSheet');
+      const nuevoTexto = document.createElement('div');
+      nuevoTexto.className = `card-element ${clase}-text canvas-item`;
+      nuevoTexto.contentEditable = "true";
+      nuevoTexto.innerText = contenido;
+      nuevoTexto.onclick = function(e) { seleccionarElemento(this, e); };
+      canvas.appendChild(nuevoTexto);
+      seleccionarElemento(nuevoTexto);
+    }
+
+    function agregarElemento(nombre) {
+      const canvas = document.getElementById('canvasSheet');
+      const el = document.createElement('div');
+      el.className = 'card-element canvas-item';
+      el.style.padding = '10px';
+      el.style.border = '1px dashed #6366f1';
+      el.innerText = nombre;
+      el.onclick = function(e) { seleccionarElemento(this, e); };
+      canvas.appendChild(el);
+      seleccionarElemento(el);
+    }
+
+    // 5. Cargar Plantillas
+    function cargarPlantilla(tipo) {
+      const canvas = document.getElementById('canvasSheet');
+      if(tipo === 'boda') {
+        canvas.style.background = '#ffffff';
+        canvas.innerHTML = `
+          <div class="card-element header-text canvas-item" onclick="seleccionarElemento(this, event)" contenteditable="true" style="font-family:'Great Vibes'; color:#6366f1;">¡Nos Casamos!</div>
+          <div class="card-element names-text canvas-item" onclick="seleccionarElemento(this, event)" contenteditable="true">Sofía & Mateo</div>
+          <div class="card-element details-text canvas-item" onclick="seleccionarElemento(this, event)" contenteditable="true">24 de Octubre 2026</div>
+        `;
+      } else if(tipo === 'cumple') {
+        canvas.style.background = '#e0f2fe';
+        canvas.innerHTML = `
+          <div class="card-element names-text canvas-item" onclick="seleccionarElemento(this, event)" contenteditable="true" style="color:#0284c7;">🎈 ¡Mi Cumple #5!</div>
+          <div class="card-element details-text canvas-item" onclick="seleccionarElemento(this, event)" contenteditable="true">Fiesta Safari de Lucas</div>
+        `;
+      } else if(tipo === 'xv') {
+        canvas.style.background = '#fef3c7';
+        canvas.innerHTML = `
+          <div class="card-element names-text canvas-item" onclick="seleccionarElemento(this, event)" contenteditable="true" style="color:#b45309;">👑 Mis XV Años</div>
+          <div class="card-element details-text canvas-item" onclick="seleccionarElemento(this, event)" contenteditable="true">Valentina</div>
+        `;
+      }
+    }
+
+    // 6. Subir Imagen
+    function subirImagen(e) {
+      const file = e.target.files[0];
+      if(file) {
+        const reader = new FileReader();
+        reader.onload = function(evt) {
+          const gallery = document.getElementById('uploadedGallery');
+          const img = document.createElement('img');
+          img.src = evt.target.result;
+          img.style.width = '100%';
+          img.style.borderRadius = '8px';
+          img.style.cursor = 'pointer';
+          img.style.marginBottom = '10px';
+          img.onclick = function() {
+            const canvas = document.getElementById('canvasSheet');
+            const canvasImg = document.createElement('img');
+            canvasImg.src = evt.target.result;
+            canvasImg.style.maxWidth = '150px';
+            canvasImg.className = 'canvas-item';
+            canvasImg.onclick = function(e) { seleccionarElemento(this, e); };
+            canvas.appendChild(canvasImg);
+          };
+          gallery.appendChild(img);
+        }
+        reader.readAsDataURL(file);
+      }
+    }
+
+    function cambiarColorLienzo(color) {
+      document.getElementById('canvasSheet').style.backgroundColor = color;
+    }
+
+    function limpiarLienzo() {
+      document.getElementById('canvasSheet').innerHTML = '';
+    }
+
+    function exportarInvitacion() {
+      alert('🎉 ¡Invitación lista! Generando descarga en alta resolución (PNG/PDF)...');
+    }
+  </script>
 
 </body>
 </html>
