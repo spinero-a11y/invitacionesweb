@@ -26,10 +26,10 @@
     </div>
   </header>
 
-  <!-- Workspace con Barra Lateral Estilo Canva -->
+  <!-- Workspace del Editor -->
   <div class="editor-workspace">
 
-    <!-- 1. BARRA VERTICAL DE ICONOS (Estilo Canva) -->
+    <!-- 1. BARRA LATERAL DE NAVEGACIÓN (Estilo Canva) -->
     <aside class="canva-nav-bar">
       <button class="canva-nav-item active" data-tab="tab-plantillas">
         <span class="icon">🎨</span>
@@ -67,62 +67,62 @@
         <span>Proyectos</span>
       </button>
 
-      <button class="canva-nav-item" data-tab="tab-apps">
-        <span class="icon">🎛️</span>
-        <span>Apps</span>
-      </button>
-
       <button class="canva-nav-item" data-tab="tab-multimedia">
-        <span class="icon">🖼️</span>
-        <span>Multimedia</span>
+        <span class="icon">✨</span>
+        <span>Multimedia IA</span>
       </button>
     </aside>
 
-    <!-- 2. PANEL DESPLEGABLE DE CONTENIDO -->
+    <!-- 2. PANEL DESPLEGABLE CON ESTILO UNIFORME -->
     <aside class="canva-drawer">
 
-      <!-- Pestaña 1: Plantillas -->
+      <!-- Plantillas -->
       <div id="tab-plantillas" class="drawer-pane active">
         <h3>Plantillas para Eventos</h3>
-        <p class="drawer-sub">Selecciona un diseño para cargar</p>
-        <div class="drawer-list">
-          <div class="drawer-card-item" onclick="cargarPlantilla('boda')">
-            <div class="item-preview preview-boda">💍 Boda Botánica</div>
+        <p class="drawer-sub">Selecciona un diseño prediseñado</p>
+        <div class="drawer-grid-list">
+          <div class="canva-item-card" onclick="cargarPlantilla('boda')">
+            <div class="item-thumb preview-boda">💍 Boda Botánica</div>
+            <span>Boda Elegante</span>
           </div>
-          <div class="drawer-card-item" onclick="cargarPlantilla('cumple')">
-            <div class="item-preview preview-infantil">🎂 Cumpleaños Safari</div>
+          <div class="canva-item-card" onclick="cargarPlantilla('cumple')">
+            <div class="item-thumb preview-infantil">🎂 Cumple Safari</div>
+            <span>Infantil / Safari</span>
           </div>
-          <div class="drawer-card-item" onclick="cargarPlantilla('xv')">
-            <div class="item-preview preview-xv">👑 XV Años Luxury</div>
+          <div class="canva-item-card" onclick="cargarPlantilla('xv')">
+            <div class="item-thumb preview-xv">👑 XV Años</div>
+            <span>XV Luxury</span>
           </div>
         </div>
       </div>
 
-      <!-- Pestaña 2: Elementos -->
+      <!-- Elementos -->
       <div id="tab-elementos" class="drawer-pane">
         <h3>Elementos Gráficos</h3>
         <p class="drawer-sub">Haz clic para agregar al lienzo</p>
-        <div class="element-grid">
-          <button class="element-box" onclick="agregarElemento('🌺 Marco Floral')">🌺 Marco Floral</button>
-          <button class="element-box" onclick="agregarElemento('✨ Brillos Gold')">✨ Brillos Gold</button>
-          <button class="element-box" onclick="agregarElemento('📍 Icono Ubicación')">📍 Mapa Icon</button>
-          <button class="element-box" onclick="agregarElemento('🎀 Listón Elegante')">🎀 Listón VIP</button>
+        <div class="drawer-grid-2col">
+          <div class="canva-box-btn" onclick="agregarElemento('🌺 Marco Floral')">🌺 Marco Floral</div>
+          <div class="canva-box-btn" onclick="agregarElemento('✨ Brillos Gold')">✨ Brillos Gold</div>
+          <div class="canva-box-btn" onclick="agregarElemento('📍 Icono Ubicación')">📍 Mapa Icon</div>
+          <div class="canva-box-btn" onclick="agregarElemento('🎀 Listón VIP')">🎀 Listón VIP</div>
         </div>
       </div>
 
-      <!-- Pestaña 3: Texto -->
+      <!-- Texto -->
       <div id="tab-texto" class="drawer-pane">
         <h3>Agregar Texto</h3>
-        <p class="drawer-sub">Toca para añadir a la invitación</p>
-        <button class="add-text-btn title-type" onclick="agregarTexto('Título del Evento', 'title')">Añadir un título</button>
-        <button class="add-text-btn subtitle-type" onclick="agregarTexto('Nombres de los Festejados', 'subtitle')">Añadir un subtítulo</button>
-        <button class="add-text-btn body-type" onclick="agregarTexto('Fecha, hora y lugar del evento...', 'body')">Añadir texto de información</button>
+        <p class="drawer-sub">Personaliza tus mensajes</p>
+        <div class="text-presets-list">
+          <button class="canva-box-btn text-title" onclick="agregarTexto('Título del Evento', 'title')">Añadir un título</button>
+          <button class="canva-box-btn text-subtitle" onclick="agregarTexto('Nombres de los Festejados', 'subtitle')">Añadir un subtítulo</button>
+          <button class="canva-box-btn text-body" onclick="agregarTexto('Fecha, hora y lugar del evento...', 'body')">Añadir texto de información</button>
+        </div>
       </div>
 
-      <!-- Pestaña 4: Marca -->
+      <!-- Marca -->
       <div id="tab-marca" class="drawer-pane">
         <h3>Kit de Marca <span class="pro-tag">PRO</span></h3>
-        <p class="drawer-sub">Paletas y fuentes de tu marca personal</p>
+        <p class="drawer-sub">Paletas y estilo personalizado</p>
         <div class="color-palette">
           <div class="palette-swatch" style="background:#6366f1" onclick="cambiarColorLienzo('#6366f1')"></div>
           <div class="palette-swatch" style="background:#ec4899" onclick="cambiarColorLienzo('#ec4899')"></div>
@@ -131,56 +131,103 @@
         </div>
       </div>
 
-      <!-- Pestaña 5: Subidos -->
+      <!-- Subidos (Local + Google Drive + YouTube) -->
       <div id="tab-subidos" class="drawer-pane">
-        <h3>Archivos Subidos</h3>
-        <p class="drawer-sub">Sube tus fotos o logotipos</p>
-        <input type="file" id="fileUpload" style="display:none" onchange="subirImagen(event)">
-        <button class="btn-primary btn-block mb-20" onclick="document.getElementById('fileUpload').click()">☁️ Subir Archivo</button>
+        <h3>Subidos</h3>
+        <p class="drawer-sub">Archivos de tu dispositivo o la nube</p>
+
+        <!-- Subida Local -->
+        <input type="file" id="fileUpload" style="display:none" accept="image/*" onchange="subirImagenLocal(event)">
+        <button class="btn-primary btn-block mb-10" onclick="document.getElementById('fileUpload').click()">
+          💻 Subir desde este dispositivo
+        </button>
+
+        <!-- Opciones Cloud y Redes -->
+        <div class="cloud-services-grid mb-20">
+          <button class="cloud-btn" onclick="importarGoogleDrive()">
+            <span>📁</span> Google Drive
+          </button>
+          <button class="cloud-btn" onclick="importarYouTube()">
+            <span>▶️</span> Enlace YouTube
+          </button>
+        </div>
+
         <div id="uploadedGallery" class="uploaded-gallery">
-          <small style="color:var(--text-muted)">No has subido archivos aún.</small>
+          <p class="section-label">Archivos importados</p>
+          <small id="emptyGalleryMsg" style="color:var(--text-muted)">No has subido ningún archivo aún.</small>
         </div>
       </div>
 
-      <!-- Pestaña 6: Herramientas -->
+      <!-- Herramientas -->
       <div id="tab-herramientas" class="drawer-pane">
         <h3>Herramientas de Edición</h3>
-        <button class="btn-secondary btn-block mb-20" onclick="limpiarLienzo()">🗑️ Limpiar Lienzo</button>
-        <button class="btn-secondary btn-block" onclick="cambiarFondo()">🎨 Cambiar Fondo del Lienzo</button>
+        <p class="drawer-sub">Ajustes rápidos del proyecto</p>
+        <button class="btn-secondary btn-block mb-10" onclick="limpiarLienzo()">🗑️ Limpiar Lienzo</button>
+        <button class="btn-secondary btn-block" onclick="cambiarFondoAleatorio()">🎨 Color de Fondo Aleatorio</button>
       </div>
 
-      <!-- Pestaña 7: Proyectos -->
+      <!-- Proyectos Anteriores -->
       <div id="tab-proyectos" class="drawer-pane">
-        <h3>Tus Diseños</h3>
-        <p class="drawer-sub">Diseños guardados recientemente</p>
-        <div class="drawer-card-item">
-          <strong>Boda civil y recepción</strong><br>
-          <small style="color:var(--text-muted)">Editado hace 2 horas</small>
+        <h3>Tus Proyectos</h3>
+        <p class="drawer-sub">Diseños creados anteriormente</p>
+        <div class="user-projects-list">
+          <div class="project-history-card" onclick="cargarProyectoExistente('Boda Civil Sofía', 'boda')">
+            <div class="project-mini-icon">💒</div>
+            <div class="project-details">
+              <strong>Boda Civil Sofía & Mateo</strong>
+              <small>Editado hace 2 horas</small>
+            </div>
+          </div>
+
+          <div class="project-history-card" onclick="cargarProyectoExistente('Fiesta Lucas', 'cumple')">
+            <div class="project-mini-icon">🎈</div>
+            <div class="project-details">
+              <strong>Fiesta Safari Lucas #5</strong>
+              <small>Editado ayer</small>
+            </div>
+          </div>
+
+          <div class="project-history-card" onclick="cargarProyectoExistente('XV Valentina', 'xv')">
+            <div class="project-mini-icon">👑</div>
+            <div class="project-details">
+              <strong>XV Años Valentina Glitz</strong>
+              <small>Editado hace 4 días</small>
+            </div>
+          </div>
         </div>
       </div>
 
-      <!-- Pestaña 8: Apps -->
-      <div id="tab-apps" class="drawer-pane">
-        <h3>Integraciones</h3>
-        <button class="btn-secondary btn-block mb-20" onclick="alert('Integración con Google Maps para ubicación de fiesta')">📍 Google Maps RSVP</button>
-        <button class="btn-secondary btn-block" onclick="alert('Generando código QR para el pase...')">📱 Generar Código QR</button>
-      </div>
-
-      <!-- Pestaña 9: Multimedia -->
+      <!-- Multimedia (Generador IA Text-to-Image) -->
       <div id="tab-multimedia" class="drawer-pane">
-        <h3>Fotos e Ilustraciones</h3>
-        <div class="drawer-list">
-          <div class="element-box" onclick="agregarElemento('📸 Foto Muestra Novios')">📸 Foto Pareja</div>
-          <div class="element-box" onclick="agregarElemento('🎈 Globos Festejo')">🎈 Globos Fiesta</div>
+        <h3>Generador IA de Imágenes</h3>
+        <p class="drawer-sub">Transforma texto en ilustraciones e imágenes para tu tarjeta</p>
+
+        <div class="ai-generator-box">
+          <textarea id="aiPrompt" class="ai-prompt-input" rows="3" placeholder="Ej. Flores acuarela doradas estilo vintage para boda..."></textarea>
+          <button class="btn-primary btn-block" onclick="generarImagenIA()" id="btnGenerateAI">
+            ✨ Generar con IA
+          </button>
+        </div>
+
+        <div id="aiLoader" class="ai-loader" style="display: none;">
+          <span>🪄 La IA está creando tu imagen...</span>
+        </div>
+
+        <div id="aiResults" class="ai-results-grid">
+          <p class="section-label">Sugerencias IA disponibles:</p>
+          <div class="drawer-grid-2col">
+            <div class="canva-box-btn" onclick="agregarElemento('🌸 Flores Acuarela IA')">🌸 Flores Acuarela</div>
+            <div class="canva-box-btn" onclick="agregarElemento('✨ Polvo de Oro IA')">✨ Polvo de Oro</div>
+          </div>
         </div>
       </div>
 
     </aside>
 
-    <!-- 3. LIENZO Y BARRA DE FORMATO DE TEXTO -->
+    <!-- 3. LIENZO Y BARRA DE HERRAMIENTAS -->
     <main class="canvas-container">
       
-      <!-- Toolbar de formato para el texto seleccionado -->
+      <!-- Toolbar de Formato -->
       <div class="canvas-toolbar">
         <select id="fontSelect" class="toolbar-select" onchange="aplicarFuente(this.value)">
           <option value="'Inter', sans-serif">Inter (Moderna)</option>
@@ -193,11 +240,11 @@
 
         <button class="tool-icon-btn" onclick="formatoTexto('bold')"><b>B</b></button>
         <button class="tool-icon-btn" onclick="formatoTexto('italic')"><i>I</i></button>
-        <button class="tool-icon-btn" onclick="formatoTexto('center')">📄 Alineación</button>
-        <button class="tool-icon-btn" style="color: #ef4444;" onclick="borrarElementoSeleccionado()">🗑️ Eliminar Elemento</button>
+        <button class="tool-icon-btn" onclick="formatoTexto('center')">📄 Centrar</button>
+        <button class="tool-icon-btn red-btn" onclick="borrarElementoSeleccionado()">🗑️ Eliminar</button>
       </div>
 
-      <!-- Hoja del Lienzo Interactivo -->
+      <!-- Lienzo -->
       <div class="canvas-paper">
         <div id="canvasSheet" class="invitation-card-mockup" onclick="deseleccionarTodo(event)">
           <div class="card-element header-text canvas-item" onclick="seleccionarElemento(this, event)" contenteditable="true">¡Nos Casamos!</div>
@@ -216,11 +263,11 @@
 
   </div>
 
-  <!-- SCRIPT INTERACTIVO EN TIEMPO REAL -->
+  <!-- SCRIPT INTERACTIVO -->
   <script>
     let elementoSeleccionado = null;
 
-    // 1. Cambio de Pestañas en la Barra Lateral
+    // 1. Navegación por pestañas laterales
     const navItems = document.querySelectorAll('.canva-nav-item');
     const drawerPanes = document.querySelectorAll('.drawer-pane');
 
@@ -235,7 +282,7 @@
       });
     });
 
-    // 2. Selección de Elementos en el Lienzo
+    // 2. Selección de Elementos en Lienzo
     function seleccionarElemento(el, e) {
       if(e) e.stopPropagation();
       if(elementoSeleccionado) elementoSeleccionado.classList.remove('selected');
@@ -250,18 +297,10 @@
       }
     }
 
-    // 3. Funciones de formato de Texto
-    function aplicarFuente(fuente) {
-      if(elementoSeleccionado) elementoSeleccionado.style.fontFamily = fuente;
-    }
-
-    function aplicarTamano(tamano) {
-      if(elementoSeleccionado) elementoSeleccionado.style.fontSize = tamano + 'px';
-    }
-
-    function aplicarColorTexto(color) {
-      if(elementoSeleccionado) elementoSeleccionado.style.color = color;
-    }
+    // 3. Formato de texto
+    function aplicarFuente(fuente) { if(elementoSeleccionado) elementoSeleccionado.style.fontFamily = fuente; }
+    function aplicarTamano(tamano) { if(elementoSeleccionado) elementoSeleccionado.style.fontSize = tamano + 'px'; }
+    function aplicarColorTexto(color) { if(elementoSeleccionado) elementoSeleccionado.style.color = color; }
 
     function formatoTexto(tipo) {
       if(!elementoSeleccionado) return;
@@ -281,7 +320,7 @@
       }
     }
 
-    // 4. Agregar Nuevos Textos y Elementos
+    // 4. Agregar Textos y Elementos al lienzo
     function agregarTexto(contenido, clase) {
       const canvas = document.getElementById('canvasSheet');
       const nuevoTexto = document.createElement('div');
@@ -297,8 +336,9 @@
       const canvas = document.getElementById('canvasSheet');
       const el = document.createElement('div');
       el.className = 'card-element canvas-item';
-      el.style.padding = '10px';
-      el.style.border = '1px dashed #6366f1';
+      el.style.padding = '8px 12px';
+      el.style.background = 'rgba(99, 102, 241, 0.1)';
+      el.style.borderRadius = '8px';
       el.innerText = nombre;
       el.onclick = function(e) { seleccionarElemento(this, e); };
       canvas.appendChild(el);
@@ -330,45 +370,103 @@
       }
     }
 
-    // 6. Subir Imagen
-    function subirImagen(e) {
+    // 6. Subidos (Local, Google Drive, YouTube)
+    function subirImagenLocal(e) {
       const file = e.target.files[0];
       if(file) {
         const reader = new FileReader();
         reader.onload = function(evt) {
-          const gallery = document.getElementById('uploadedGallery');
-          const img = document.createElement('img');
-          img.src = evt.target.result;
-          img.style.width = '100%';
-          img.style.borderRadius = '8px';
-          img.style.cursor = 'pointer';
-          img.style.marginBottom = '10px';
-          img.onclick = function() {
-            const canvas = document.getElementById('canvasSheet');
-            const canvasImg = document.createElement('img');
-            canvasImg.src = evt.target.result;
-            canvasImg.style.maxWidth = '150px';
-            canvasImg.className = 'canvas-item';
-            canvasImg.onclick = function(e) { seleccionarElemento(this, e); };
-            canvas.appendChild(canvasImg);
-          };
-          gallery.appendChild(img);
+          agregarItemAGaleria(evt.target.result);
         }
         reader.readAsDataURL(file);
       }
     }
 
-    function cambiarColorLienzo(color) {
-      document.getElementById('canvasSheet').style.backgroundColor = color;
+    function importarGoogleDrive() {
+      alert("📁 Conectando con Google Drive... (Selecciona tu imagen)");
+      // Simulación de archivo seleccionado desde Drive
+      agregarItemAGaleria("https://via.placeholder.com/150/6366f1/ffffff?text=Drive_Foto.jpg");
     }
 
-    function limpiarLienzo() {
-      document.getElementById('canvasSheet').innerHTML = '';
+    function importarYouTube() {
+      const url = prompt("Ingresa el enlace del video de YouTube para incrustar el audio/video:");
+      if(url) {
+        agregarElemento("▶️ Video Adjunto: " + url);
+      }
     }
 
-    function exportarInvitacion() {
-      alert('🎉 ¡Invitación lista! Generando descarga en alta resolución (PNG/PDF)...');
+    function agregarItemAGaleria(src) {
+      const gallery = document.getElementById('uploadedGallery');
+      const msg = document.getElementById('emptyGalleryMsg');
+      if(msg) msg.style.display = 'none';
+
+      const img = document.createElement('img');
+      img.src = src;
+      img.style.width = '100%';
+      img.style.borderRadius = '8px';
+      img.style.cursor = 'pointer';
+      img.style.marginBottom = '10px';
+      img.style.border = '1px solid var(--border-color)';
+      img.onclick = function() {
+        const canvas = document.getElementById('canvasSheet');
+        const canvasImg = document.createElement('img');
+        canvasImg.src = src;
+        canvasImg.style.maxWidth = '160px';
+        canvasImg.className = 'canvas-item';
+        canvasImg.onclick = function(e) { seleccionarElemento(this, e); };
+        canvas.appendChild(canvasImg);
+      };
+      gallery.appendChild(img);
     }
+
+    // 7. Cargar Proyectos Anteriores
+    function cargarProyectoExistente(nombre, plantillaTipo) {
+      document.getElementById('projectTitle').value = nombre;
+      cargarPlantilla(plantillaTipo);
+    }
+
+    // 8. Generador IA Multimedia (Text to Image)
+    function generarImagenIA() {
+      const promptText = document.getElementById('aiPrompt').value;
+      if(!promptText.trim()) {
+        alert("Por favor escribe una descripción para generar la imagen.");
+        return;
+      }
+
+      const loader = document.getElementById('aiLoader');
+      const btn = document.getElementById('btnGenerateAI');
+
+      loader.style.display = 'block';
+      btn.disabled = true;
+
+      // Simulación de conexión con API de IA (Ej: Stable Diffusion / Midjourney / DALL-E)
+      setTimeout(() => {
+        loader.style.display = 'none';
+        btn.disabled = false;
+
+        const resultsGrid = document.getElementById('aiResults');
+        const newBox = document.createElement('div');
+        newBox.className = 'canva-box-btn';
+        newBox.style.borderColor = '#10b981';
+        newBox.innerText = '✨ IA: ' + promptText.substring(0, 18) + '...';
+        newBox.onclick = function() {
+          agregarElemento('🎨 [Imagen IA] ' + promptText);
+        };
+        resultsGrid.appendChild(newBox);
+
+        document.getElementById('aiPrompt').value = '';
+      }, 1500);
+    }
+
+    function cambiarColorLienzo(color) { document.getElementById('canvasSheet').style.backgroundColor = color; }
+    function cambiarFondoAleatorio() {
+      const colores = ['#f8fafc', '#fef2f2', '#f0fdf4', '#faf5ff', '#fff7ed'];
+      const random = colores[Math.floor(Math.random() * colores.length)];
+      document.getElementById('canvasSheet').style.backgroundColor = random;
+    }
+
+    function limpiarLienzo() { document.getElementById('canvasSheet').innerHTML = ''; }
+    function exportarInvitacion() { alert('🎉 ¡Invitación guardada! Generando descarga PNG/PDF...'); }
   </script>
 
 </body>

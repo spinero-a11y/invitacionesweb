@@ -896,3 +896,174 @@ body {
 .drawer-card-item:hover {
   border-color: var(--primary);
 }
+/* --- Unificación Estilo Canva para el Editor --- */
+.drawer-grid-list, .user-projects-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.canva-item-card {
+  background: #f8fafc;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 8px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.canva-item-card:hover {
+  border-color: var(--primary);
+  background: #f1f5f9;
+}
+
+.item-thumb {
+  height: 80px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+.drawer-grid-2col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.canva-box-btn {
+  background: #f8fafc;
+  border: 1px solid var(--border-color);
+  padding: 12px 10px;
+  text-align: center;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+  width: 100%;
+  transition: all 0.2s;
+}
+
+.canva-box-btn:hover {
+  border-color: var(--primary);
+  background: #e0e7ff;
+  color: var(--primary);
+}
+
+.text-presets-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.text-title { font-size: 1.1rem; font-weight: 700; text-align: left; }
+.text-subtitle { font-size: 0.95rem; font-weight: 600; text-align: left; }
+.text-body { font-size: 0.85rem; text-align: left; }
+
+/* Subidos: Google Drive / YouTube */
+.cloud-services-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.cloud-btn {
+  background: white;
+  border: 1px solid var(--border-color);
+  padding: 10px;
+  border-radius: 8px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.cloud-btn:hover {
+  border-color: var(--primary);
+  background: #f8fafc;
+}
+
+.section-label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  margin: 15px 0 10px 0;
+}
+
+/* Proyectos Anteriores */
+.project-history-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: #f8fafc;
+  border: 1px solid var(--border-color);
+  padding: 10px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.project-history-card:hover {
+  border-color: var(--primary);
+  background: white;
+}
+
+.project-mini-icon {
+  font-size: 1.5rem;
+}
+
+.project-details {
+  display: flex;
+  flex-direction: column;
+}
+
+.project-details strong {
+  font-size: 0.85rem;
+}
+
+.project-details small {
+  color: var(--text-muted);
+  font-size: 0.75rem;
+}
+
+/* Generador IA Multimedia */
+.ai-generator-box {
+  background: #f8fafc;
+  border: 1px solid var(--border-color);
+  padding: 12px;
+  border-radius: 10px;
+  margin-bottom: 15px;
+}
+
+.ai-prompt-input {
+  width: 100%;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  padding: 8px;
+  font-size: 0.85rem;
+  font-family: inherit;
+  resize: none;
+  margin-bottom: 10px;
+  outline: none;
+}
+
+.ai-prompt-input:focus {
+  border-color: var(--primary);
+}
+
+.ai-loader {
+  font-size: 0.8rem;
+  color: #6366f1;
+  font-weight: 600;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+.red-btn {
+  color: #ef4444 !important;
+}
