@@ -1067,3 +1067,161 @@ body {
 .red-btn {
   color: #ef4444 !important;
 }
+/* --- Modal Estilo Canva Pro / Business --- */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(15, 23, 42, 0.6);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+}
+
+.modal-overlay.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.modal-card {
+  background: #f8fafc;
+  width: 90%;
+  max-width: 520px;
+  max-height: 90vh;
+  overflow-y: auto;
+  border-radius: 16px;
+  padding: 28px;
+  position: relative;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2);
+  font-family: 'Inter', sans-serif;
+}
+
+.modal-close-btn {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: transparent;
+  border: none;
+  font-size: 1.2rem;
+  color: #64748b;
+  cursor: pointer;
+}
+
+/* Caja de alerta azul superior */
+.info-alert-box {
+  background-color: #dbeafe;
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 20px;
+  font-size: 0.85rem;
+  color: #1e3a8a;
+  line-height: 1.5;
+}
+
+.info-alert-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 6px;
+  font-size: 0.95rem;
+}
+
+.info-alert-box a {
+  color: #1d4ed8;
+  font-weight: 600;
+  text-decoration: underline;
+}
+
+/* Títulos y Header */
+.pro-modal-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+
+.pro-crown {
+  font-size: 1.1rem;
+}
+
+.pro-subtitle {
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: #0f172a;
+}
+
+.pro-modal-title {
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: #0f172a;
+  margin-bottom: 6px;
+}
+
+.gradient-text {
+  color: #8b5cf6;
+}
+
+.pro-modal-desc {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #334155;
+  margin-bottom: 16px;
+}
+
+/* Lista de Beneficios */
+.pro-benefits-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 24px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.pro-benefits-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  font-size: 0.88rem;
+  color: #334155;
+  line-height: 1.4;
+}
+
+.check-icon {
+  color: #8b5cf6;
+  font-weight: 800;
+  font-size: 1.1rem;
+}
+
+/* Botón Morado de Prueba */
+.btn-pro-trial {
+  width: 100%;
+  background: #8b5cf6;
+  color: white;
+  border: none;
+  padding: 14px;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s;
+  box-shadow: 0 4px 12px rgba(139, 92, 246, 0.3);
+}
+
+.btn-pro-trial:hover {
+  background: #7c3aed;
+}
+
+.modal-footer-text {
+  font-size: 0.78rem;
+  color: #64748b;
+  text-align: center;
+  margin-top: 12px;
+}

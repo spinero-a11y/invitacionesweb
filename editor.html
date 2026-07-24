@@ -468,6 +468,82 @@
     function limpiarLienzo() { document.getElementById('canvasSheet').innerHTML = ''; }
     function exportarInvitacion() { alert('🎉 ¡Invitación guardada! Generando descarga PNG/PDF...'); }
   </script>
+<!-- Modal PRO / Business -->
+<div id="proModal" class="modal-overlay" onclick="cerrarModalPro(event)">
+  <div class="modal-card">
+    <button class="modal-close-btn" onclick="cerrarModalPro(null, true)">✕</button>
+    
+    <!-- Caja Informativa Superior -->
+    <div class="info-alert-box">
+      <div class="info-alert-header">
+        <span class="info-icon">ℹ️</span>
+        <strong>Pásate a InvitArt Pro</strong>
+      </div>
+      <p>
+        InvitArt Pro no está disponible para ti en este momento porque es un plan individual y hay un equipo con integrantes en tu cuenta. Si quieres pasarte a Pro, primero tienes que quitarlos. 
+        <a href="#" onclick="alert('Redirigiendo a administración de equipo...'); return false;">Administrar el equipo</a>
+      </p>
+    </div>
 
+    <!-- Encabezado Pro -->
+    <div class="pro-modal-header">
+      <span class="pro-crown">👑</span>
+      <span class="pro-subtitle">Hazte Pro para usar este elemento</span>
+    </div>
+
+    <h2 class="pro-modal-title">Prueba <span class="gradient-text">InvitArt Business</span> gratis</h2>
+    <p class="pro-modal-desc">Business impulsa el crecimiento gracias a:</p>
+
+    <!-- Lista de Beneficios -->
+    <ul class="pro-benefits-list">
+      <li>
+        <span class="check-icon">✓</span> 
+        <span>Todo lo que te ofrece Pro, como Redimensión Mágica, Quitafondos y plantillas premium.</span>
+      </li>
+      <li>
+        <span class="check-icon">✓</span> 
+        <span>Usa la IA en todas las herramientas hasta 20 veces más que con InvitArt Gratis.</span>
+      </li>
+      <li>
+        <span class="check-icon">✓</span> 
+        <span>Trabaja en equipo y gestiona hasta 100 Kits de Marca para lograr un branding impecable.</span>
+      </li>
+      <li>
+        <span class="check-icon">✓</span> 
+        <span>Imprime todo lo que quieras con un 10% de descuento.</span>
+      </li>
+      <li>
+        <span class="check-icon">✓</span> 
+        <span>Crea hasta 100 enlaces cortos personalizados para compartir tus diseños.</span>
+      </li>
+    </ul>
+
+    <!-- Botón CTA -->
+    <button class="btn-pro-trial" onclick="alert('¡Iniciando tu prueba de 30 días gratis!')">
+      Pruébalo 30 días gratis
+    </button>
+    
+    <p class="modal-footer-text">
+      Te avisaremos antes de que termine la prueba. Cancela en cualquier momento con unos pocos clics.
+    </p>
+  </div>
+</div>
+<!-- Tu contenido HTML aquí arriba -->
+
+  <script>
+    // Abrir Modal PRO
+    function abrirModalPro() {
+      document.getElementById('proModal').classList.add('active');
+    }
+
+    // Cerrar Modal PRO
+    function cerrarModalPro(event, forzar = false) {
+      if (forzar || event.target.id === 'proModal') {
+        document.getElementById('proModal').classList.remove('active');
+      }
+    }
+  </script>
+</body>
+</html>
 </body>
 </html>
