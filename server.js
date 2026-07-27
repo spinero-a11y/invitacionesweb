@@ -7,27 +7,9 @@ const path = require('path');
 
 const app = express();
 
-// Middleware
-app.use(express.json({ limit: '10mb' })); // Permite guardar JSONs/HTMLs grandes de las invitaciones
-app.use(cors());
-
-// Servir archivos estáticos desde la carpeta actual y la carpeta padre
-app.use(express.static(__dirname));
-app.use(express.static(path.join(__dirname, '..')));
-
-// Ruta por defecto para login.html
-app.get('/login.html', (req, res) => {
-  res.sendFile(path.join(__dirname, 'login.html'), (err) => {
-    if (err) {
-      // Si no está en la misma carpeta, busca un nivel arriba
-      res.sendFile(path.join(__dirname, '..', 'login.html'), (err2) => {
-        if (err2) {
-          res.status(404).send('No se encontró el archivo login.html en el servidor.');
-        }
-      });
-    }
-  });
-});
+// Configuración básica
+const SECRET_KEY = process.env.JWT_SECRET || 'clave_secreta_para_tokens'; // Idealmente usar variables de entorno
+const PORT = process.env.PORT || 3000;
 
 // Configuración de conexión a Oracle FreeSQL (23ai)
 const dbConfig = {
@@ -36,27 +18,81 @@ const dbConfig = {
   connectString: "tcps://db.freesql.com:2484/23ai_34ui2"
 };
 
-const SECRET_KEY = 'clave_secreta_para_tokens';
+// Middleware global
+app.use(express.json({ limit: '10mb' }));
+app.use(cors());
+
+// Servir archivos estáticos
+app.use(express.static(__dirname));
+app.use(express.static(path.join(__dirname, '..')));
 
 // ==========================================
-// RUTA 1: REGISTRO DE USUARIOS
+// MIDDLEWARE DE AUTENTICACIÓN (JWT)
 // ==========================================
+const verificarToken = (req, res, next) => {
+  const authHeader = req.headers['authorization'];
+  const token = authHeader && authHeader.split(' ')[1]; // Expects: "Bearer <TOKEN>"
+
+  if (!token) {
+    return res.status(401).json({ mensaje: 'Acceso denegado: Token no proporcionado' });
+  }
+
+  try {
+    const verificado = jwt.verify(token, SECRET_KEY);
+    req.usuario = verificado; // Guardamos la info del token (userId, nombre) en la request
+    next();
+  } catch (error) {
+    return res.status(403).json({ mensaje: 'Token inválido o expirado' });
+  }
+};
+
+// ==========================================
+// RUTAS DE ARCHIVOS HTML
+// ==========================================
+app.get('/login.html', (req, res) => {
+  res.sendFile(path.join(__dirname, 'login.html'), (err) => {
+    if (err) {
+      res.sendFile(path.join(__dirname, '..', 'login.html'), (err2) => {
+        if (err2) res.status(404).send('No se encontró login.html');
+      });
+    }
+  });
+});
+
+app.get('/editor.html', (req, res) => {
+  res.sendFile(path.join(__dirname, 'editor.html'), (err) => {
+    if (err) {
+      res.sendFile(path.join(__dirname, '..', 'editor.html'), (err2) => {
+        if (err2) res.status(404).send('No se encontró editor.html');
+      });
+    }
+  });
+});
+
+// ==========================================
+// RUTAS API
+// ==========================================
+
+// 1. REGISTRO
 app.post('/api/registro', async (req, res) => {
   const { nombre, email, password } = req.body;
   let connection;
 
+  if (!nombre || !email || !password) {
+    return res.status(400).json({ mensaje: 'Todos los campos son obligatorios' });
+  }
+
   try {
     connection = await oracledb.getConnection(dbConfig);
-
     const passwordHash = await bcrypt.hash(password, 10);
 
     const sql = `INSERT INTO usuarios (nombre, email, password_hash) VALUES (:1, :2, :3)`;
-    await connection.execute(sql, [nombre, email, passwordHash], { autoCommit: true });
+    await connection.execute(sql, [nombre, email], { autoCommit: true });
 
     res.status(201).json({ mensaje: 'Usuario registrado con éxito' });
   } catch (error) {
     console.error('Error en registro:', error);
-    if (error.message.includes('ORA-00001')) {
+    if (error.message && error.message.includes('ORA-00001')) {
       return res.status(400).json({ mensaje: 'El correo electrónico ya está registrado.' });
     }
     res.status(500).json({ mensaje: 'Error al registrar usuario en la BD', error: error.message });
@@ -65,9 +101,7 @@ app.post('/api/registro', async (req, res) => {
   }
 });
 
-// ==========================================
-// RUTA 2: INICIO DE SESIÓN
-// ==========================================
+// 2. LOGIN
 app.post('/api/login', async (req, res) => {
   const { email, password } = req.body;
   let connection;
@@ -83,12 +117,13 @@ app.post('/api/login', async (req, res) => {
     }
 
     const [id, nombre, passwordHash] = result.rows[0];
-
     const passwordValido = await bcrypt.compare(password, passwordHash);
+
     if (!passwordValido) {
       return res.status(401).json({ mensaje: 'Correo o contraseña incorrectos' });
     }
 
+    // Generar Token
     const token = jwt.sign({ userId: id, nombre }, SECRET_KEY, { expiresIn: '8h' });
 
     res.json({ mensaje: 'Login exitoso', token, usuario: { id, nombre, email } });
@@ -100,11 +135,10 @@ app.post('/api/login', async (req, res) => {
   }
 });
 
-// ==========================================
-// RUTA 3: CREAR UN BOCETO (Solo Creadora/Admin)
-// ==========================================
-app.post('/api/bocetos', async (req, res) => {
-  const { titulo, imagen_preview, contenido_json, es_pro, usuarioId } = req.body;
+// 3. CREAR BOCETO (Protegido por Token y Check Admin)
+app.post('/api/bocetos', verificarToken, async (req, res) => {
+  const { titulo, imagen_preview, contenido_json, es_pro } = req.body;
+  const usuarioId = req.usuario.userId; // Obtenido de forma segura desde el JWT
   let connection;
 
   try {
@@ -132,9 +166,7 @@ app.post('/api/bocetos', async (req, res) => {
   }
 });
 
-// ==========================================
-// RUTA 4: OBTENER TODOS LOS BOCETOS (Para la galería)
-// ==========================================
+// 4. OBTENER BOCETOS (Público)
 app.get('/api/bocetos', async (req, res) => {
   let connection;
 
@@ -160,11 +192,10 @@ app.get('/api/bocetos', async (req, res) => {
   }
 });
 
-// ==========================================
-// RUTA 5: GUARDAR PROYECTO DE USUARIO (NUEVA)
-// ==========================================
-app.post('/api/proyectos', async (req, res) => {
-  const { titulo, contenido_json, usuarioId } = req.body;
+// 5. GUARDAR PROYECTO (Protegido por Token)
+app.post('/api/proyectos', verificarToken, async (req, res) => {
+  const { titulo, contenido_json } = req.body;
+  const usuarioId = req.usuario.userId; // Extraído del Token autenticado
   let connection;
 
   try {
@@ -182,23 +213,7 @@ app.post('/api/proyectos', async (req, res) => {
   }
 });
 
-// ==========================================
-// RUTAS DE ARCHIVOS HTML Y ARRANQUE DEL SERVIDOR
-// ==========================================
-app.get('/login.html', (req, res) => {
-  res.sendFile(path.join(__dirname, 'login.html'), (err) => {
-    if (err) res.sendFile(path.join(__dirname, 'invitacionesweb', 'login.html'));
-  });
-});
-
-app.get('/editor.html', (req, res) => {
-  res.sendFile(path.join(__dirname, 'editor.html'), (err) => {
-    if (err) res.sendFile(path.join(__dirname, 'invitacionesweb', 'editor.html'));
-  });
-});
-
-// Escuchar en el puerto 3000
-const PORT = 3000;
+// Arrancar el servidor
 app.listen(PORT, () => {
   console.log(`🚀 Servidor corriendo en http://localhost:${PORT}/login.html`);
   console.log(`🎨 Editor disponible en http://localhost:${PORT}/editor.html`);
