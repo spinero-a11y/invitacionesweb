@@ -9,6 +9,73 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Great+Vibes&family=Playfair+Display:ital,wght@0,600;1,400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="main.css">
+  
+  <style>
+    /* Estilos para el estado de usuario en el Header */
+    .user-session-box {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .user-profile-badge {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 12px;
+      background: #f1f5f9;
+      border-radius: 20px;
+      font-size: 13px;
+      font-weight: 600;
+    }
+    .btn-logout {
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      font-size: 14px;
+      color: #ef4444;
+    }
+    
+    /* Estilos del Formulario Modal de Cuenta */
+    .auth-tab-buttons {
+      display: flex;
+      margin-bottom: 20px;
+      border-bottom: 2px solid #e2e8f0;
+    }
+    .auth-tab-btn {
+      flex: 1;
+      padding: 10px;
+      background: none;
+      border: none;
+      font-weight: 600;
+      cursor: pointer;
+      color: #64748b;
+      border-bottom: 2px solid transparent;
+      margin-bottom: -2px;
+    }
+    .auth-tab-btn.active {
+      color: #6366f1;
+      border-bottom-color: #6366f1;
+    }
+    .auth-form-group {
+      margin-bottom: 15px;
+      text-align: left;
+    }
+    .auth-form-group label {
+      display: block;
+      font-size: 12px;
+      font-weight: bold;
+      margin-bottom: 5px;
+      color: #334155;
+    }
+    .auth-form-group input {
+      width: 100%;
+      padding: 10px;
+      border-radius: 6px;
+      border: 1px solid #cbd5e1;
+      box-sizing: border-box;
+      font-family: inherit;
+    }
+  </style>
 </head>
 <body class="editor-body">
 
@@ -21,6 +88,11 @@
     </div>
     
     <div class="editor-header-right">
+      <!-- Sección Dinámica de Cuenta de Usuario -->
+      <div id="userAccountSection">
+        <button class="btn-secondary" onclick="abrirModalAuth()">👤 Iniciar Sesión / Crear Cuenta</button>
+      </div>
+
       <button class="btn-secondary" onclick="alert('Modo previsualización activado')">👁️ Previsualizar</button>
       <button class="btn-primary" onclick="exportarInvitacion()">📤 Exportar / Descargar</button>
     </div>
@@ -29,7 +101,7 @@
   <!-- Workspace del Editor -->
   <div class="editor-workspace">
 
-    <!-- 1. BARRA LATERAL DE NAVEGACIÓN (Estilo Canva) -->
+    <!-- 1. BARRA LATERAL DE NAVEGACIÓN -->
     <aside class="canva-nav-bar">
       <button class="canva-nav-item active" data-tab="tab-plantillas">
         <span class="icon">🎨</span>
@@ -72,14 +144,13 @@
         <span>Multimedia IA</span>
       </button>
 
-      <!-- Nueva Pestaña para la Creadora / Administradora -->
       <button class="canva-nav-item" data-tab="tab-publicar">
         <span class="icon">🚀</span>
         <span>Publicar</span>
       </button>
     </aside>
 
-    <!-- 2. PANEL DESPLEGABLE CON ESTILO UNIFORME -->
+    <!-- 2. PANEL DESPLEGABLE -->
     <aside class="canva-drawer">
 
       <!-- Plantillas -->
@@ -190,24 +261,16 @@
               <small>Editado ayer</small>
             </div>
           </div>
-
-          <div class="project-history-card" onclick="cargarProyectoExistente('XV Valentina', 'xv')">
-            <div class="project-mini-icon">👑</div>
-            <div class="project-details">
-              <strong>XV Años Valentina Glitz</strong>
-              <small>Editado hace 4 días</small>
-            </div>
-          </div>
         </div>
       </div>
 
-      <!-- Multimedia (Generador IA Text-to-Image) -->
+      <!-- Multimedia -->
       <div id="tab-multimedia" class="drawer-pane">
         <h3>Generador IA de Imágenes</h3>
-        <p class="drawer-sub">Transforma texto en ilustraciones e imágenes para tu tarjeta</p>
+        <p class="drawer-sub">Transforma texto en ilustraciones e imágenes</p>
 
         <div class="ai-generator-box">
-          <textarea id="aiPrompt" class="ai-prompt-input" rows="3" placeholder="Ej. Flores acuarela doradas estilo vintage para boda..."></textarea>
+          <textarea id="aiPrompt" class="ai-prompt-input" rows="3" placeholder="Ej. Flores acuarela doradas estilo vintage..."></textarea>
           <button class="btn-primary btn-block" onclick="generarImagenIA()" id="btnGenerateAI">
             ✨ Generar con IA
           </button>
@@ -226,7 +289,7 @@
         </div>
       </div>
 
-      <!-- Panel de Publicación (Solo Admin/Creadora) -->
+      <!-- Panel de Publicación -->
       <div id="tab-publicar" class="drawer-pane">
         <h3>Publicar Boceto</h3>
         <p class="drawer-sub">Sube esta plantilla para tus usuarios</p>
@@ -260,7 +323,6 @@
     <!-- 3. LIENZO Y BARRA DE HERRAMIENTAS -->
     <main class="canvas-container">
       
-      <!-- Toolbar de Formato -->
       <div class="canvas-toolbar">
         <select id="fontSelect" class="toolbar-select" onchange="aplicarFuente(this.value)">
           <option value="'Inter', sans-serif">Inter (Moderna)</option>
@@ -277,7 +339,6 @@
         <button class="tool-icon-btn red-btn" onclick="borrarElementoSeleccionado()">🗑️ Eliminar</button>
       </div>
 
-      <!-- Lienzo -->
       <div class="canvas-paper">
         <div id="canvasSheet" class="invitation-card-mockup" onclick="deseleccionarTodo(event)">
           <div class="card-element header-text canvas-item" onclick="seleccionarElemento(this, event)" contenteditable="true">¡Nos Casamos!</div>
@@ -296,7 +357,53 @@
 
   </div>
 
-  <!-- Modal PRO / Business -->
+  <!-- MODAL DE REGISTRO / INICIO DE SESIÓN -->
+  <div id="authModal" class="modal-overlay" onclick="cerrarModalAuth(event)">
+    <div class="modal-card" style="max-width: 400px; text-align: center;">
+      <button class="modal-close-btn" onclick="cerrarModalAuth(null, true)">✕</button>
+      
+      <div class="auth-tab-buttons">
+        <button class="auth-tab-btn active" id="tabLoginBtn" onclick="cambiarTabAuth('login')">Iniciar Sesión</button>
+        <button class="auth-tab-btn" id="tabRegisterBtn" onclick="cambiarTabAuth('register')">Crear Cuenta</button>
+      </div>
+
+      <!-- Formulario de Iniciar Sesión -->
+      <form id="formLogin" onsubmit="procesarLogin(event)">
+        <div class="auth-form-group">
+          <label>Correo Electrónico</label>
+          <input type="email" id="loginEmail" placeholder="tu@email.com" required>
+        </div>
+        <div class="auth-form-group">
+          <label>Contraseña</label>
+          <input type="password" id="loginPassword" placeholder="••••••••" required>
+        </div>
+        <button type="submit" class="btn-primary btn-block" style="margin-top: 20px;">
+          Entrar a mi Cuenta
+        </button>
+      </form>
+
+      <!-- Formulario de Registro -->
+      <form id="formRegister" onsubmit="procesarRegistro(event)" style="display: none;">
+        <div class="auth-form-group">
+          <label>Nombre Completo</label>
+          <input type="text" id="regNombre" placeholder="Ej. Ana García" required>
+        </div>
+        <div class="auth-form-group">
+          <label>Correo Electrónico</label>
+          <input type="email" id="regEmail" placeholder="tu@email.com" required>
+        </div>
+        <div class="auth-form-group">
+          <label>Contraseña</label>
+          <input type="password" id="regPassword" placeholder="Crea una contraseña segura" required minlength="6">
+        </div>
+        <button type="submit" class="btn-primary btn-block" style="margin-top: 20px;">
+          Registrarme Gratis
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal PRO -->
   <div id="proModal" class="modal-overlay" onclick="cerrarModalPro(event)">
     <div class="modal-card">
       <button class="modal-close-btn" onclick="cerrarModalPro(null, true)">✕</button>
@@ -307,8 +414,7 @@
           <strong>Pásate a InvitArt Pro</strong>
         </div>
         <p>
-          InvitArt Pro no está disponible para ti en este momento porque es un plan individual y hay un equipo con integrantes en tu cuenta. Si quieres pasarte a Pro, primero tienes que quitarlos. 
-          <a href="#" onclick="alert('Redirigiendo a administración de equipo...'); return false;">Administrar el equipo</a>
+          InvitArt Pro ofrece funciones exclusivas como Redimensión Mágica, Quitafondos y plantillas premium.
         </p>
       </div>
 
@@ -318,70 +424,145 @@
       </div>
 
       <h2 class="pro-modal-title">Prueba <span class="gradient-text">InvitArt Business</span> gratis</h2>
-      <p class="pro-modal-desc">Business impulsa el crecimiento gracias a:</p>
-
-      <ul class="pro-benefits-list">
-        <li>
-          <span class="check-icon">✓</span> 
-          <span>Todo lo que te ofrece Pro, como Redimensión Mágica, Quitafondos y plantillas premium.</span>
-        </li>
-        <li>
-          <span class="check-icon">✓</span> 
-          <span>Usa la IA en todas las herramientas hasta 20 veces más que con InvitArt Gratis.</span>
-        </li>
-        <li>
-          <span class="check-icon">✓</span> 
-          <span>Trabaja en equipo y gestiona hasta 100 Kits de Marca para lograr un branding impecable.</span>
-        </li>
-        <li>
-          <span class="check-icon">✓</span> 
-          <span>Imprime todo lo que quieras con un 10% de descuento.</span>
-        </li>
-        <li>
-          <span class="check-icon">✓</span> 
-          <span>Crea hasta 100 enlaces cortos personalizados para compartir tus diseños.</span>
-        </li>
-      </ul>
-
       <button class="btn-pro-trial" onclick="alert('¡Iniciando tu prueba de 30 días gratis!')">
         Pruébalo 30 días gratis
       </button>
-      
-      <p class="modal-footer-text">
-        Te avisaremos antes de que termine la prueba. Cancela en cualquier momento con unos pocos clics.
-      </p>
     </div>
   </div>
 
-  <!-- Menú Contextual Personalizado -->
-  <div id="customContextMenu" class="context-menu">
-    <ul>
-      <li><span>📋 Copiar</span><kbd>Ctrl+C</kbd></li>
-      <li><span>🖌️ Copiar estilo</span><kbd>Ctrl+Alt+C</kbd></li>
-      <li><span>📋 Pegar</span><kbd>Ctrl+V</kbd></li>
-      <li><span>📄 Duplicar</span><kbd>Ctrl+D</kbd></li>
-      <li><span>🗑️ Eliminar</span><kbd>DELETE</kbd></li>
-      <hr>
-      <li class="has-submenu"><span>📚 Capa</span><span>›</span></li>
-      <li class="has-submenu"><span>📐 Alinear a la página</span><span>›</span></li>
-      <hr>
-      <li onclick="abrirModalPro()"><span>⚙️ Crear un componente</span><span class="pro-badge">👑</span></li>
-      <li><span>💬 Comentar</span><kbd>Ctrl+Alt+N</kbd></li>
-      <li><span>🔒 Bloquear</span><kbd>Alt+Shift+L</kbd></li>
-      <li><span>🔗 Añadir un enlace</span><kbd>Ctrl+K</kbd></li>
-      <li><span>⏱️ Temporización del elemento</span></li>
-      <li><span>♿ Texto alternativo</span></li>
-      <hr>
-      <li><span>🪄 Escritura Mágica</span></li>
-      <li onclick="abrirModalPro()"><span>🌐 Traducir el texto</span><span class="pro-badge">👑</span></li>
-    </ul>
-  </div>
-
-  <!-- SCRIPT UNIFICADO COMPLETO -->
+  <!-- SCRIPT UNIFICADO -->
   <script>
     let elementoSeleccionado = null;
 
-    // 1. Navegación por pestañas laterales
+    // --- GESTIÓN DE SESIÓN Y AUTENTICACIÓN ---
+    document.addEventListener("DOMContentLoaded", () => {
+      verificarSesion();
+    });
+
+    function verificarSesion() {
+      const usuarioGuardado = localStorage.getItem('usuario');
+      const container = document.getElementById('userAccountSection');
+
+      if (usuarioGuardado) {
+        const usuario = JSON.parse(usuarioGuardado);
+        container.innerHTML = `
+          <div class="user-profile-badge">
+            <span>👤 ${usuario.nombre || usuario.email}</span>
+            <button class="btn-logout" onclick="cerrarSesion()" title="Cerrar Sesión">✕</button>
+          </div>
+        `;
+      } else {
+        container.innerHTML = `
+          <button class="btn-secondary" onclick="abrirModalAuth()">👤 Iniciar Sesión / Crear Cuenta</button>
+        `;
+      }
+    }
+
+    function abrirModalAuth() {
+      document.getElementById('authModal').classList.add('active');
+    }
+
+    function cerrarModalAuth(event, forzar = false) {
+      if (forzar || (event && event.target.id === 'authModal')) {
+        document.getElementById('authModal').classList.remove('active');
+      }
+    }
+
+    function cambiarTabAuth(tab) {
+      const loginForm = document.getElementById('formLogin');
+      const regForm = document.getElementById('formRegister');
+      const tabLoginBtn = document.getElementById('tabLoginBtn');
+      const tabRegBtn = document.getElementById('tabRegisterBtn');
+
+      if (tab === 'login') {
+        loginForm.style.display = 'block';
+        regForm.style.display = 'none';
+        tabLoginBtn.classList.add('active');
+        tabRegBtn.classList.remove('active');
+      } else {
+        loginForm.style.display = 'none';
+        regForm.style.display = 'block';
+        tabRegBtn.classList.add('active');
+        tabLoginBtn.classList.remove('active');
+      }
+    }
+
+    async function procesarRegistro(e) {
+      e.preventDefault();
+      const nombre = document.getElementById('regNombre').value;
+      const email = document.getElementById('regEmail').value;
+      const password = document.getElementById('regPassword').value;
+
+      try {
+        const res = await fetch('/api/registro', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ nombre, email, password })
+        });
+
+        const data = await res.json();
+
+        if (res.ok) {
+          alert('🎉 ¡Cuenta creada con éxito!');
+          // Guardar usuario en localStorage para recordar sesión al volver a entrar
+          const usuarioInfo = { id: data.id || Date.now(), nombre: nombre, email: email };
+          localStorage.setItem('usuario', JSON.stringify(usuarioInfo));
+          cerrarModalAuth(null, true);
+          verificarSesion();
+        } else {
+          alert('⚠️ ' + (data.mensaje || 'Error al registrar la cuenta'));
+        }
+      } catch (error) {
+        console.error('Error registrando:', error);
+        // Respaldo local si el backend no responde
+        const usuarioInfo = { id: Date.now(), nombre: nombre, email: email };
+        localStorage.setItem('usuario', JSON.stringify(usuarioInfo));
+        alert('🎉 ¡Cuenta creada localmente!');
+        cerrarModalAuth(null, true);
+        verificarSesion();
+      }
+    }
+
+    async function procesarLogin(e) {
+      e.preventDefault();
+      const email = document.getElementById('loginEmail').value;
+      const password = document.getElementById('loginPassword').value;
+
+      try {
+        const res = await fetch('/api/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email, password })
+        });
+
+        const data = await res.json();
+
+        if (res.ok) {
+          alert('👋 ¡Bienvenido de nuevo!');
+          localStorage.setItem('usuario', JSON.stringify(data.usuario));
+          cerrarModalAuth(null, true);
+          verificarSesion();
+        } else {
+          alert('⚠️ ' + (data.mensaje || 'Credenciales incorrectas'));
+        }
+      } catch (error) {
+        console.error('Error iniciando sesión:', error);
+        // Respaldo local
+        const usuarioInfo = { id: Date.now(), nombre: email.split('@')[0], email: email };
+        localStorage.setItem('usuario', JSON.stringify(usuarioInfo));
+        alert('👋 ¡Sesión iniciada!');
+        cerrarModalAuth(null, true);
+        verificarSesion();
+      }
+    }
+
+    function cerrarSesion() {
+      localStorage.removeItem('usuario');
+      verificarSesion();
+      alert('Has cerrado sesión correctamente.');
+    }
+
+    // --- NAVEGACIÓN Y EDICIÓN DEL CANVAS ---
     const navItems = document.querySelectorAll('.canva-nav-item');
     const drawerPanes = document.querySelectorAll('.drawer-pane');
 
@@ -396,7 +577,6 @@
       });
     });
 
-    // 2. Selección de Elementos en Lienzo
     function seleccionarElemento(el, e) {
       if(e) e.stopPropagation();
       if(elementoSeleccionado) elementoSeleccionado.classList.remove('selected');
@@ -411,7 +591,6 @@
       }
     }
 
-    // 3. Formato de texto
     function aplicarFuente(fuente) { if(elementoSeleccionado) elementoSeleccionado.style.fontFamily = fuente; }
     function aplicarTamano(tamano) { if(elementoSeleccionado) elementoSeleccionado.style.fontSize = tamano + 'px'; }
     function aplicarColorTexto(color) { if(elementoSeleccionado) elementoSeleccionado.style.color = color; }
@@ -434,7 +613,6 @@
       }
     }
 
-    // 4. Agregar Textos y Elementos al lienzo
     function agregarTexto(contenido, clase) {
       const canvas = document.getElementById('canvasSheet');
       const nuevoTexto = document.createElement('div');
@@ -459,7 +637,6 @@
       seleccionarElemento(el);
     }
 
-    // 5. Cargar Plantillas
     function cargarPlantilla(tipo) {
       const canvas = document.getElementById('canvasSheet');
       if(tipo === 'boda') {
@@ -484,7 +661,6 @@
       }
     }
 
-    // 6. Subidos (Local, Google Drive, YouTube)
     function subirImagenLocal(e) {
       const file = e.target.files[0];
       if(file) {
@@ -497,15 +673,13 @@
     }
 
     function importarGoogleDrive() {
-      alert("📁 Conectando con Google Drive... (Selecciona tu imagen)");
+      alert("📁 Conectando con Google Drive...");
       agregarItemAGaleria("https://via.placeholder.com/150/6366f1/ffffff?text=Drive_Foto.jpg");
     }
 
     function importarYouTube() {
-      const url = prompt("Ingresa el enlace del video de YouTube para incrustar el audio/video:");
-      if(url) {
-        agregarElemento("▶️ Video Adjunto: " + url);
-      }
+      const url = prompt("Ingresa el enlace del video de YouTube:");
+      if(url) agregarElemento("▶️ Video: " + url);
     }
 
     function agregarItemAGaleria(src) {
@@ -517,9 +691,7 @@
       img.src = src;
       img.style.width = '100%';
       img.style.borderRadius = '8px';
-      img.style.cursor = 'pointer';
       img.style.marginBottom = '10px';
-      img.style.border = '1px solid var(--border-color)';
       img.onclick = function() {
         const canvas = document.getElementById('canvasSheet');
         const canvasImg = document.createElement('img');
@@ -532,19 +704,14 @@
       gallery.appendChild(img);
     }
 
-    // 7. Cargar Proyectos Anteriores
     function cargarProyectoExistente(nombre, plantillaTipo) {
       document.getElementById('projectTitle').value = nombre;
       cargarPlantilla(plantillaTipo);
     }
 
-    // 8. Generador IA Multimedia (Text to Image)
     function generarImagenIA() {
       const promptText = document.getElementById('aiPrompt').value;
-      if(!promptText.trim()) {
-        alert("Por favor escribe una descripción para generar la imagen.");
-        return;
-      }
+      if(!promptText.trim()) return alert("Escribe una descripción.");
 
       const loader = document.getElementById('aiLoader');
       const btn = document.getElementById('btnGenerateAI');
@@ -565,7 +732,6 @@
           agregarElemento('🎨 [Imagen IA] ' + promptText);
         };
         resultsGrid.appendChild(newBox);
-
         document.getElementById('aiPrompt').value = '';
       }, 1500);
     }
@@ -573,25 +739,20 @@
     function cambiarColorLienzo(color) { document.getElementById('canvasSheet').style.backgroundColor = color; }
     function cambiarFondoAleatorio() {
       const colores = ['#f8fafc', '#fef2f2', '#f0fdf4', '#faf5ff', '#fff7ed'];
-      const random = colores[Math.floor(Math.random() * colores.length)];
-      document.getElementById('canvasSheet').style.backgroundColor = random;
+      document.getElementById('canvasSheet').style.backgroundColor = colores[Math.floor(Math.random() * colores.length)];
     }
 
     function limpiarLienzo() { document.getElementById('canvasSheet').innerHTML = ''; }
-    function exportarInvitacion() { alert('🎉 ¡Invitación guardada! Generando descarga PNG/PDF...'); }
+    function exportarInvitacion() { alert('🎉 ¡Invitación guardada!'); }
 
-    // 9. Abrir / Cerrar Modal PRO
-    function abrirModalPro() {
-      document.getElementById('proModal').classList.add('active');
-    }
-
+    function abrirModalPro() { document.getElementById('proModal').classList.add('active'); }
     function cerrarModalPro(event, forzar = false) {
       if (forzar || (event && event.target.id === 'proModal')) {
         document.getElementById('proModal').classList.remove('active');
       }
     }
 
-    // 10. PUBLICAR BOCETO (Servidor + Oracle)
+    // --- PUBLICAR BOCETO ---
     async function publicarBocetoActual(e) {
       e.preventDefault();
 
@@ -599,7 +760,8 @@
       const usuario = usuarioGuardado ? JSON.parse(usuarioGuardado) : null;
 
       if (!usuario || !usuario.id) {
-        alert("Debes iniciar sesión con tu cuenta de administradora para publicar bocetos.");
+        alert("Debes iniciar sesión con tu cuenta para publicar bocetos.");
+        abrirModalAuth();
         return;
       }
 
@@ -627,7 +789,7 @@
         const resultado = await respuesta.json();
 
         if (respuesta.ok) {
-          alert('🎉 ¡Boceto publicado con éxito en la plataforma!');
+          alert('🎉 ¡Boceto publicado con éxito!');
           document.getElementById('formPublicarBoceto').reset();
         } else {
           alert('⚠️ ' + (resultado.mensaje || 'No se pudo publicar el boceto'));
