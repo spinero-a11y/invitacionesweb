@@ -71,6 +71,12 @@
         <span class="icon">✨</span>
         <span>Multimedia IA</span>
       </button>
+
+      <!-- Nueva Pestaña para la Creadora / Administradora -->
+      <button class="canva-nav-item" data-tab="tab-publicar">
+        <span class="icon">🚀</span>
+        <span>Publicar</span>
+      </button>
     </aside>
 
     <!-- 2. PANEL DESPLEGABLE CON ESTILO UNIFORME -->
@@ -131,18 +137,16 @@
         </div>
       </div>
 
-      <!-- Subidos (Local + Google Drive + YouTube) -->
+      <!-- Subidos -->
       <div id="tab-subidos" class="drawer-pane">
         <h3>Subidos</h3>
         <p class="drawer-sub">Archivos de tu dispositivo o la nube</p>
 
-        <!-- Subida Local -->
         <input type="file" id="fileUpload" style="display:none" accept="image/*" onchange="subirImagenLocal(event)">
         <button class="btn-primary btn-block mb-10" onclick="document.getElementById('fileUpload').click()">
           💻 Subir desde este dispositivo
         </button>
 
-        <!-- Opciones Cloud y Redes -->
         <div class="cloud-services-grid mb-20">
           <button class="cloud-btn" onclick="importarGoogleDrive()">
             <span>📁</span> Google Drive
@@ -222,6 +226,35 @@
         </div>
       </div>
 
+      <!-- Panel de Publicación (Solo Admin/Creadora) -->
+      <div id="tab-publicar" class="drawer-pane">
+        <h3>Publicar Boceto</h3>
+        <p class="drawer-sub">Sube esta plantilla para tus usuarios</p>
+
+        <form id="formPublicarBoceto" onsubmit="publicarBocetoActual(event)">
+          <div class="form-group mb-10" style="margin-bottom: 12px;">
+            <label style="font-size: 12px; font-weight: bold; display: block; margin-bottom: 4px;">Título de la Plantilla</label>
+            <input type="text" id="bocetoTitulo" placeholder="Ej. Boda Floral Vintage" required style="width:100%; padding:8px; border-radius:6px; border:1px solid #ccc; box-sizing: border-box;">
+          </div>
+
+          <div class="form-group mb-10" style="margin-bottom: 12px;">
+            <label style="font-size: 12px; font-weight: bold; display: block; margin-bottom: 4px;">URL Preview / Imagen</label>
+            <input type="text" id="bocetoPreview" placeholder="https://ejemplo.com/preview.jpg" required style="width:100%; padding:8px; border-radius:6px; border:1px solid #ccc; box-sizing: border-box;">
+          </div>
+
+          <div class="form-group mb-20" style="margin-top: 10px; margin-bottom: 15px;">
+            <label style="display: flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 600; cursor: pointer;">
+              <input type="checkbox" id="bocetoEsPro">
+              <span>Marcar como contenido 👑 PRO</span>
+            </label>
+          </div>
+
+          <button type="submit" class="btn-primary btn-block">
+            🚀 Publicar Plantilla
+          </button>
+        </form>
+      </div>
+
     </aside>
 
     <!-- 3. LIENZO Y BARRA DE HERRAMIENTAS -->
@@ -263,7 +296,88 @@
 
   </div>
 
-  <!-- SCRIPT INTERACTIVO -->
+  <!-- Modal PRO / Business -->
+  <div id="proModal" class="modal-overlay" onclick="cerrarModalPro(event)">
+    <div class="modal-card">
+      <button class="modal-close-btn" onclick="cerrarModalPro(null, true)">✕</button>
+      
+      <div class="info-alert-box">
+        <div class="info-alert-header">
+          <span class="info-icon">ℹ️</span>
+          <strong>Pásate a InvitArt Pro</strong>
+        </div>
+        <p>
+          InvitArt Pro no está disponible para ti en este momento porque es un plan individual y hay un equipo con integrantes en tu cuenta. Si quieres pasarte a Pro, primero tienes que quitarlos. 
+          <a href="#" onclick="alert('Redirigiendo a administración de equipo...'); return false;">Administrar el equipo</a>
+        </p>
+      </div>
+
+      <div class="pro-modal-header">
+        <span class="pro-crown">👑</span>
+        <span class="pro-subtitle">Hazte Pro para usar este elemento</span>
+      </div>
+
+      <h2 class="pro-modal-title">Prueba <span class="gradient-text">InvitArt Business</span> gratis</h2>
+      <p class="pro-modal-desc">Business impulsa el crecimiento gracias a:</p>
+
+      <ul class="pro-benefits-list">
+        <li>
+          <span class="check-icon">✓</span> 
+          <span>Todo lo que te ofrece Pro, como Redimensión Mágica, Quitafondos y plantillas premium.</span>
+        </li>
+        <li>
+          <span class="check-icon">✓</span> 
+          <span>Usa la IA en todas las herramientas hasta 20 veces más que con InvitArt Gratis.</span>
+        </li>
+        <li>
+          <span class="check-icon">✓</span> 
+          <span>Trabaja en equipo y gestiona hasta 100 Kits de Marca para lograr un branding impecable.</span>
+        </li>
+        <li>
+          <span class="check-icon">✓</span> 
+          <span>Imprime todo lo que quieras con un 10% de descuento.</span>
+        </li>
+        <li>
+          <span class="check-icon">✓</span> 
+          <span>Crea hasta 100 enlaces cortos personalizados para compartir tus diseños.</span>
+        </li>
+      </ul>
+
+      <button class="btn-pro-trial" onclick="alert('¡Iniciando tu prueba de 30 días gratis!')">
+        Pruébalo 30 días gratis
+      </button>
+      
+      <p class="modal-footer-text">
+        Te avisaremos antes de que termine la prueba. Cancela en cualquier momento con unos pocos clics.
+      </p>
+    </div>
+  </div>
+
+  <!-- Menú Contextual Personalizado -->
+  <div id="customContextMenu" class="context-menu">
+    <ul>
+      <li><span>📋 Copiar</span><kbd>Ctrl+C</kbd></li>
+      <li><span>🖌️ Copiar estilo</span><kbd>Ctrl+Alt+C</kbd></li>
+      <li><span>📋 Pegar</span><kbd>Ctrl+V</kbd></li>
+      <li><span>📄 Duplicar</span><kbd>Ctrl+D</kbd></li>
+      <li><span>🗑️ Eliminar</span><kbd>DELETE</kbd></li>
+      <hr>
+      <li class="has-submenu"><span>📚 Capa</span><span>›</span></li>
+      <li class="has-submenu"><span>📐 Alinear a la página</span><span>›</span></li>
+      <hr>
+      <li onclick="abrirModalPro()"><span>⚙️ Crear un componente</span><span class="pro-badge">👑</span></li>
+      <li><span>💬 Comentar</span><kbd>Ctrl+Alt+N</kbd></li>
+      <li><span>🔒 Bloquear</span><kbd>Alt+Shift+L</kbd></li>
+      <li><span>🔗 Añadir un enlace</span><kbd>Ctrl+K</kbd></li>
+      <li><span>⏱️ Temporización del elemento</span></li>
+      <li><span>♿ Texto alternativo</span></li>
+      <hr>
+      <li><span>🪄 Escritura Mágica</span></li>
+      <li onclick="abrirModalPro()"><span>🌐 Traducir el texto</span><span class="pro-badge">👑</span></li>
+    </ul>
+  </div>
+
+  <!-- SCRIPT UNIFICADO COMPLETO -->
   <script>
     let elementoSeleccionado = null;
 
@@ -384,7 +498,6 @@
 
     function importarGoogleDrive() {
       alert("📁 Conectando con Google Drive... (Selecciona tu imagen)");
-      // Simulación de archivo seleccionado desde Drive
       agregarItemAGaleria("https://via.placeholder.com/150/6366f1/ffffff?text=Drive_Foto.jpg");
     }
 
@@ -439,7 +552,6 @@
       loader.style.display = 'block';
       btn.disabled = true;
 
-      // Simulación de conexión con API de IA (Ej: Stable Diffusion / Midjourney / DALL-E)
       setTimeout(() => {
         loader.style.display = 'none';
         btn.disabled = false;
@@ -467,105 +579,64 @@
 
     function limpiarLienzo() { document.getElementById('canvasSheet').innerHTML = ''; }
     function exportarInvitacion() { alert('🎉 ¡Invitación guardada! Generando descarga PNG/PDF...'); }
-  </script>
-<!-- Modal PRO / Business -->
-<div id="proModal" class="modal-overlay" onclick="cerrarModalPro(event)">
-  <div class="modal-card">
-    <button class="modal-close-btn" onclick="cerrarModalPro(null, true)">✕</button>
-    
-    <!-- Caja Informativa Superior -->
-    <div class="info-alert-box">
-      <div class="info-alert-header">
-        <span class="info-icon">ℹ️</span>
-        <strong>Pásate a InvitArt Pro</strong>
-      </div>
-      <p>
-        InvitArt Pro no está disponible para ti en este momento porque es un plan individual y hay un equipo con integrantes en tu cuenta. Si quieres pasarte a Pro, primero tienes que quitarlos. 
-        <a href="#" onclick="alert('Redirigiendo a administración de equipo...'); return false;">Administrar el equipo</a>
-      </p>
-    </div>
 
-    <!-- Encabezado Pro -->
-    <div class="pro-modal-header">
-      <span class="pro-crown">👑</span>
-      <span class="pro-subtitle">Hazte Pro para usar este elemento</span>
-    </div>
-
-    <h2 class="pro-modal-title">Prueba <span class="gradient-text">InvitArt Business</span> gratis</h2>
-    <p class="pro-modal-desc">Business impulsa el crecimiento gracias a:</p>
-
-    <!-- Lista de Beneficios -->
-    <ul class="pro-benefits-list">
-      <li>
-        <span class="check-icon">✓</span> 
-        <span>Todo lo que te ofrece Pro, como Redimensión Mágica, Quitafondos y plantillas premium.</span>
-      </li>
-      <li>
-        <span class="check-icon">✓</span> 
-        <span>Usa la IA en todas las herramientas hasta 20 veces más que con InvitArt Gratis.</span>
-      </li>
-      <li>
-        <span class="check-icon">✓</span> 
-        <span>Trabaja en equipo y gestiona hasta 100 Kits de Marca para lograr un branding impecable.</span>
-      </li>
-      <li>
-        <span class="check-icon">✓</span> 
-        <span>Imprime todo lo que quieras con un 10% de descuento.</span>
-      </li>
-      <li>
-        <span class="check-icon">✓</span> 
-        <span>Crea hasta 100 enlaces cortos personalizados para compartir tus diseños.</span>
-      </li>
-    </ul>
-
-    <!-- Botón CTA -->
-    <button class="btn-pro-trial" onclick="alert('¡Iniciando tu prueba de 30 días gratis!')">
-      Pruébalo 30 días gratis
-    </button>
-    
-    <p class="modal-footer-text">
-      Te avisaremos antes de que termine la prueba. Cancela en cualquier momento con unos pocos clics.
-    </p>
-  </div>
-</div>
-<!-- Tu contenido HTML aquí arriba -->
-
-  <script>
-    // Abrir Modal PRO
+    // 9. Abrir / Cerrar Modal PRO
     function abrirModalPro() {
       document.getElementById('proModal').classList.add('active');
     }
 
-    // Cerrar Modal PRO
     function cerrarModalPro(event, forzar = false) {
-      if (forzar || event.target.id === 'proModal') {
+      if (forzar || (event && event.target.id === 'proModal')) {
         document.getElementById('proModal').classList.remove('active');
       }
     }
+
+    // 10. PUBLICAR BOCETO (Servidor + Oracle)
+    async function publicarBocetoActual(e) {
+      e.preventDefault();
+
+      const usuarioGuardado = localStorage.getItem('usuario');
+      const usuario = usuarioGuardado ? JSON.parse(usuarioGuardado) : null;
+
+      if (!usuario || !usuario.id) {
+        alert("Debes iniciar sesión con tu cuenta de administradora para publicar bocetos.");
+        return;
+      }
+
+      const canvasSheet = document.getElementById('canvasSheet');
+      const contenidoDiseno = {
+        html: canvasSheet.innerHTML,
+        backgroundColor: canvasSheet.style.backgroundColor || '#ffffff'
+      };
+
+      const datosBoceto = {
+        titulo: document.getElementById('bocetoTitulo').value,
+        imagen_preview: document.getElementById('bocetoPreview').value,
+        contenido_json: JSON.stringify(contenidoDiseno),
+        es_pro: document.getElementById('bocetoEsPro').checked,
+        usuarioId: usuario.id
+      };
+
+      try {
+        const respuesta = await fetch('/api/bocetos', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(datosBoceto)
+        });
+
+        const resultado = await respuesta.json();
+
+        if (respuesta.ok) {
+          alert('🎉 ¡Boceto publicado con éxito en la plataforma!');
+          document.getElementById('formPublicarBoceto').reset();
+        } else {
+          alert('⚠️ ' + (resultado.mensaje || 'No se pudo publicar el boceto'));
+        }
+      } catch (error) {
+        console.error('Error enviando el boceto:', error);
+        alert('Ocurrió un error al conectar con el servidor.');
+      }
+    }
   </script>
-  <!-- Menú Contextual Personalizado -->
-<div id="customContextMenu" class="context-menu">
-  <ul>
-    <li><span>📋 Copiar</span><kbd>Ctrl+C</kbd></li>
-    <li><span>🖌️ Copiar estilo</span><kbd>Ctrl+Alt+C</kbd></li>
-    <li><span>📋 Pegar</span><kbd>Ctrl+V</kbd></li>
-    <li><span>📄 Duplicar</span><kbd>Ctrl+D</kbd></li>
-    <li><span>🗑️ Eliminar</span><kbd>DELETE</kbd></li>
-    <hr>
-    <li class="has-submenu"><span>📚 Capa</span><span>›</span></li>
-    <li class="has-submenu"><span>📐 Alinear a la página</span><span>›</span></li>
-    <hr>
-    <!-- Opción PRO conectada a tu función de abrirModalPro() -->
-    <li onclick="abrirModalPro()"><span>⚙️ Crear un componente</span><span class="pro-badge">👑</span></li>
-    <li><span>💬 Comentar</span><kbd>Ctrl+Alt+N</kbd></li>
-    <li><span>🔒 Bloquear</span><kbd>Alt+Shift+L</kbd></li>
-    <li><span>🔗 Añadir un enlace</span><kbd>Ctrl+K</kbd></li>
-    <li><span>⏱️ Temporización del elemento</span></li>
-    <li><span>♿ Texto alternativo</span></li>
-    <hr>
-    <li><span>🪄 Escritura Mágica</span></li>
-    <li onclick="abrirModalPro()"><span>🌐 Traducir el texto</span><span class="pro-badge">👑</span></li>
-  </ul>
-</div>
 </body>
 </html>
